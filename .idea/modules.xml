@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Y2_Clinical_9.iml" filepath="$PROJECT_DIR$/Y2_Clinical_9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Y2_Clinical_9.iml" filepath="$PROJECT_DIR$/.idea/modules/Y2_Clinical_9.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Y2_Clinical_9_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Y2_Clinical_9_main.iml" group="Y2_Clinical_9" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Y2_Clinical_9_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Y2_Clinical_9_test.iml" group="Y2_Clinical_9" />
     </modules>

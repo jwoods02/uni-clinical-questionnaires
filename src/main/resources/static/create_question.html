@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Question</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6">
+        <form class="form-horizontal">
+            <fieldset>
+                <!-- Create Question Form -->
+                <legend>Form Name</legend>
+
+                <!-- Question-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Question Description</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" placeholder="Question Description" class="form-control input-md">
+                        <span class="help-block">Write your question here</span>
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="submit">Submit</label>
+                    <div class="col-md-4">
+                        <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Add Option</legend>
+
+                <!-- Button Drop Down -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="buttondropdown">Select Option Type</label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input id="buttondropdown" name="buttondropdown" class="form-control" placeholder="None Selected" type="text">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Select
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#">Radio Button</a></li>
+                                    <li><a href="#">Single Line</a></li>
+                                    <li><a href="#">Multi-Line</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="addOption">Add Option</label>
+                    <div class="col-md-4">
+                        <button id="addOption" name="addOption" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
