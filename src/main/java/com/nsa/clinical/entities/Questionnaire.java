@@ -1,5 +1,7 @@
 package com.nsa.clinical.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -7,8 +9,10 @@ import java.util.List;
 /**
  * Created by c1571078 on 17/11/2017.
  */
+
+@Data
 @Entity
-@Table(name = "Questionnaire")
+@Table(name = "questionnaire")
 public class Questionnaire {
 
     @Id
@@ -22,70 +26,13 @@ public class Questionnaire {
     @Column(name = "questionnaire_description")
     private String questionnaireDescription;
 
+    @Column(name = "date_created")
+    private Date dateCreated;
+
     @ManyToOne
     @JoinColumn(name="admin_id",referencedColumnName="admin_id")
     private Admin admin;
 
-    @Column(name = "date_created")
-    private Date dateCreated;
-
     @OneToMany(mappedBy="questionnaire",targetEntity=Question.class)
     private List<Question> questions;
-
-    public Questionnaire(String questionnaireTitle, String questionnaireDescription, Date dateCreated) {
-        this.questionnaireTitle = questionnaireTitle;
-        this.questionnaireDescription = questionnaireDescription;
-        this.dateCreated = dateCreated;
-    }
-
-    public Questionnaire() {
-    }
-
-    public Integer getQuestionnaireId() {
-        return questionnaireId;
-    }
-
-    public void setQuestionnaireId(Integer questionnaireId) {
-        this.questionnaireId = questionnaireId;
-    }
-
-    public String getQuestionnaireTitle() {
-        return questionnaireTitle;
-    }
-
-    public void setQuestionnaireTitle(String questionnaireTitle) {
-        this.questionnaireTitle = questionnaireTitle;
-    }
-
-    public String getQuestionnaireDescription() {
-        return questionnaireDescription;
-    }
-
-    public void setQuestionnaireDescription(String questionnaireDescription) {
-        this.questionnaireDescription = questionnaireDescription;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
 }

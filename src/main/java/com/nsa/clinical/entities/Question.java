@@ -1,5 +1,7 @@
 package com.nsa.clinical.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,8 +9,9 @@ import java.util.List;
  * Created by c1571078 on 17/11/2017.
  */
 
+@Data
 @Entity
-@Table(name = "Question")
+@Table(name = "question")
 public class Question {
 
     @Id
@@ -28,44 +31,4 @@ public class Question {
             joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
             inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
     private List<Option> options;
-
-    public Question(String questionDescription) {
-        this.questionDescription = questionDescription;
-    }
-
-    public Question() {
-    }
-
-    public Integer getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
-    }
-
-    public String getQuestionDescription() {
-        return questionDescription;
-    }
-
-    public void setQuestionDescription(String questionDescription) {
-        this.questionDescription = questionDescription;
-    }
-
-    public Questionnaire getQuestionnaire() {
-        return questionnaire;
-    }
-
-    public void setQuestionnaire(Questionnaire questionnaire) {
-        this.questionnaire = questionnaire;
-    }
-
-    public List<Option> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<Option> options) {
-        this.options = options;
-    }
-
 }
