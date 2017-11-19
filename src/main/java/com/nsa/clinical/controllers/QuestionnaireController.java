@@ -16,15 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api")
 public class QuestionnaireController {
     private QuestionnaireService questionnaireService;
+
     @Autowired
     QuestionRepository questionRepository;
+
     @Autowired
     public QuestionnaireController(QuestionnaireService questionnaireService){
         this.questionnaireService = questionnaireService;
     }
-    @RequestMapping(path = "/api/questionnaire/create", method = RequestMethod.POST)
+
+    @RequestMapping(path = "/questionnaire/create", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm){
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
-
     }
 }
