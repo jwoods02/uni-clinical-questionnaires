@@ -1,6 +1,7 @@
 package com.nsa.clinical.controllers;
 
 import com.nsa.clinical.entities.Question;
+import com.nsa.clinical.forms.NewQuestionnaireForm;
 import com.nsa.clinical.repositories.QuestionRepository;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
     @RequestMapping(path = "/api/questionnaire/create", method = RequestMethod.POST)
-    public void createQuestionnaire(){
-       // Question question = questionRepository.findById()
+    public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm){
+        questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
 
     }
 }
