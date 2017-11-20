@@ -86,17 +86,3 @@ hs_err_pid*
 BetterBuyBoot.iml
 build/
 
-/.gradle
-/.gradle/3.3
-/.gradle/3.3/taskArtifacts
-/.gradle/3.3/taskArtifacts/taskArtifacts.lock
-/.gradle/3.3/taskArtifacts/taskArtifacts.bin
-/.gradle/3.3/taskArtifacts/fileHashes.bin
-/.gradle/3.3/taskArtifacts/fileSnapshots.bin
-/.idea
-/.idea/compiler.xml
-/.idea/gradle.xml
-/.idea/misc.xml
-/.idea/workspace.xml
-/.idea/modules
-/.idea/modules/Y2_Clinical_9_main.iml
