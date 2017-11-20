@@ -26,9 +26,7 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToMany
-    @JoinTable(name="question_option",
-            joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
-            inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
-    private List<Option> options;
+    @ManyToOne
+    @JoinColumn(name="question_option")
+    private Option option;
 }

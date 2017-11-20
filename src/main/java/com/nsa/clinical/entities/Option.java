@@ -25,6 +25,6 @@ public class Option {
     @Column(name = "option_type")
     private String optionType;
 
-    @ManyToMany(mappedBy = "questions")
+    @OneToMany(mappedBy = "option")
     private List<Question> questions;
 }

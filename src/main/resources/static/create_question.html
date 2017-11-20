@@ -10,16 +10,16 @@
 <div class="container">
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="post" action="/api/questionnaire/create">
             <fieldset>
                 <!-- Create Question Form -->
                 <h1>Create New Questionnaire</h1>
 
                 <!-- Question-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="questionnaireDescription">Question Description</label>
+                    <label class="col-md-4 control-label" for="description">Question Description</label>
                     <div class="col-md-4">
-                        <input id="questionnaireDescription" name="questionnaireDescription" type="text" placeholder="Question Description" class="form-control input-md">
+                        <input id="description" name="description" type="text" placeholder="Question Description" class="form-control input-md">
                         <span class="help-block">Write your question here</span>
                     </div>
                 </div>
