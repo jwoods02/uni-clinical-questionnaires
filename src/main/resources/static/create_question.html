@@ -48,13 +48,13 @@
         </div>
     </div>
     <div class="container">
-        <form class="form">
+        <form class="form" method="post" action="/api/option">
             <fieldset>
 
                 <!-- Add Option Form -->
                 <h1>Add Option</h1>
 
-                <!-- Option Description-->
+                <!-- Option Description -->
                 <div class="form-group">
                     <label class="control-label" for="optionDescription">Option Description</label>
                     <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
@@ -84,7 +84,8 @@
                 </div>
 
                 <div class="form-group">
-                <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
+                    <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
+                    <button name="submit" class="btn btn-primary">Submit</button>
                 </div>
 
                 <!-- Button -->
@@ -102,7 +103,7 @@
 </div>
 
 <div class="hide" id="new-option-template">
-    <form class="form">
+    <form class="form" method="post" action="/api/option">
         <br>
 
         <fieldset>
@@ -113,7 +114,7 @@
             <!-- Option Description-->
             <div class="form-group">
                 <label class="control-label" for="optionDescription">Option Description</label>
-                <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
+                <input id="optionDescription" name="description" type="text" placeholder="Option Description" class="form-control input-md">
                 <span class="help-block">Write the option description here</span>
             </div>
 
@@ -122,18 +123,18 @@
                 <!--<label class="control-label" for="addOption">-->
                 Select an Option
                 </label>
-                <select class="select form-control" id="selectOption" name="addOption">
+                <select class="select form-control" id="selectOption" name="type">
 
-                    <option value="Select an Option">
+                    <option value="">
                         Select an Option
                     </option>
-                    <option value="Radio Button">
+                    <option value="1">
                         Radio Button
                     </option>
-                    <option value="Single Line">
+                    <option value="2">
                         Single Line
                     </option>
-                    <option value="Multi-Line">
+                    <option value="3">
                         Multi-Line
                     </option>
                 </select>
@@ -141,6 +142,7 @@
 
             <div class="form-group">
                 <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
+                <button name="submit" class="btn btn-primary">Submit</button>
             </div>
 
             <!-- Button -->

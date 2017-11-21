@@ -22,7 +22,8 @@ public class OptionImplementation implements  OptionService {
     public void newOption(String description, Integer type) {
         Option newOption = new Option();
         newOption.setOptionDescription(description);
-        newOption.setOptionType(type.toString());
+//        newOption.setOptionType(type.toString());
+        optionRepository.saveAndFlush(newOption);
     }
 
 
