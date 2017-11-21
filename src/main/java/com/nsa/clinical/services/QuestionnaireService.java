@@ -5,6 +5,5 @@ package com.nsa.clinical.services;
  */
 public interface QuestionnaireService {
     void newQuestionnaire(String description);
-    void newOption(String description, Integer type);
 
 }

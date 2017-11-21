@@ -3,7 +3,6 @@ package com.nsa.clinical.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by c1571078 on 17/11/2017.
@@ -26,7 +25,7 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToOne
-    @JoinColumn(name="question_option")
-    private Option option;
+//    @ManyToOne
+//    @JoinColumn(name="question_option")
+//    private Option option;
 }

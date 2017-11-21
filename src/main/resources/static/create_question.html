@@ -26,10 +26,10 @@
 </nav>
     <div class="jumbotron">
         <div class="container">
-            <form class="form" method="post" action="/api/questionnaire/create">
+            <form class="form" method="post" action="/api/question">
                 <fieldset>
                     <!-- Create Question Form -->
-                    <h1>Create New Questionnaire</h1>
+                    <h1>Create New Question</h1>
 
                     <!-- Question-->
                     <div class="form-group">
@@ -155,13 +155,51 @@
 
 <script>
 
+    var optionNumber = 0;
+
     $("#addOptionForm").click(function(){
         $("#addNewOptionsHere").append($("#new-option-template").html());
+        optionNumber += 1;
     });
 
     $(document.body).on('click', '.deleteOption' ,function(){
         $(this).closest('.form').remove();
+        optionNumber -= 1;
     });
+
+
+
+//    $('#submit').submit(function(event) {
+//
+//        var formData = {
+//            'description'              : $('input[name=description]').val()
+//        };
+//
+//        $.ajax({
+//            type        : 'POST',
+//            url         : '/api/questionnaire/create',
+//            data        : formData,
+//            dataType    : 'json',
+//            async       : 'false'
+//        })
+//        // using the done promise callback
+//            .done(function(data) {
+//                for (i = 0; i < optionNumber; i++) {
+//
+//                }
+//
+//                });
+//
+//            // using the fail promise callback
+//            .fail(function(data) {
+//
+//                // show any errors
+//                // best to remove for production
+//                console.log(data);
+//            });
+//
+//
+//    });
 
 
 </script>
