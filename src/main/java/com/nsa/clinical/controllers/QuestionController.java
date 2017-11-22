@@ -20,7 +20,7 @@ public class QuestionController {
         List<Question> questions = new ArrayList<>();
         questions.add(new Question ("How Old Are You?"));
         questions.add(new Question ("What is Your Name?"));
-        questions.add(new Question ("option3"));
+        questions.add(new Question ("Where Are You From?"));
 
         return questions;
     }

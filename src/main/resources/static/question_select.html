@@ -15,16 +15,21 @@
     <!-- Button Drop Down -->
     <div class="form-group">
         <label class="control-label col-md-4">
-            Select an Option
+            Select a Question
         </label>
         <div class = "col-md-4">
-            <select id="questions" class="select form-control" id="selectOption" name="addOption">
+            <select id="questions" class="select form-control" onchange="getSelectValue()">
 
-                <option value="Select an Option">
-                    Select an Option
-                </option>
+                <!--<option value="Select a Question">-->
+                    <!--Select a Question -->
+                <!--</option>-->
 
             </select>
+
+            <div class="questions-list">
+                <div class="question">kdjfkljdfgkl</div>
+
+            </div>
         </div>
     </div>
 
@@ -46,7 +51,22 @@
         });
     }).fail(function() {
         console.log("FAIL");
-    });
+    });</script>
+
+    <script>
+
+    function getSelectValue()
+    {
+        var selectedValue = document.getElementById("questions").value;
+        var questionList= [];
+        questionList.push(selectedValue);
+        // create array to holds clicked questions
+        // every time a questions clicked added to the array but make sure the array does not already contain the question
+        // write code to add the new added question to the page
+        console.log(selectedValue);
+    }
+    console.log("this is working")
+    getSelectValue();
 
 
 </script>
