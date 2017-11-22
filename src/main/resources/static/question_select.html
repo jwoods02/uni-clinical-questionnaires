@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Question Adder</title>
+</head>
+<body>
+
+    <h1>Add and Remove Questions</h1>
+
+    <!-- Button Drop Down -->
+    <div class="form-group">
+        <label class="control-label col-md-4">
+            Select an Option
+        </label>
+        <div class = "col-md-4">
+            <select id="questions" class="select form-control" id="selectOption" name="addOption">
+
+                <option value="Select an Option">
+                    Select an Option
+                </option>
+
+            </select>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+    $.ajax({
+        url: "/questions",
+        type: "GET",
+        dataType: "json"
+    }).done(function(data) {
+        data.forEach(function(d){
+            $("#questions").append($("<option/>", {
+                value: d.questionDescription,
+                text:d.questionDescription
+            }));
+            console.log(d)
+        });
+    }).fail(function() {
+        console.log("FAIL");
+    });
+
+
+</script>
+
+</body>
+</html>

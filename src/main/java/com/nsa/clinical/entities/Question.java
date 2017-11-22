@@ -29,4 +29,8 @@ public class Question {
     @ManyToOne
     @JoinColumn(name="question_option")
     private Option option;
+
+    public Question (String questionDescription){
+        this.questionDescription = questionDescription;
+    }
 }
