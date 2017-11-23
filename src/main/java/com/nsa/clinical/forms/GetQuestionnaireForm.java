@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetQuestionnaireForm {
-    private Long QuestionnaireId;
+    private Long id;
 }

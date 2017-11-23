@@ -9,11 +9,11 @@
 <div class="container">
     <h1>Questionnaire Previewer</h1>
     <p>Please select an existing questionnaire from the drop down menu to preview it below.</p>
-    <form>
+    <form action="/api/questionnaire/get" method="POST">
         <div class="form-row">
             <div class="col-md-6">
                 <label class="sr-only" for="select_questionnaire">Select</label>
-                <select required class="form-control" id="select_questionnaire">
+                <select required class="form-control" id="select_questionnaire" name="id">
                     <option value="" selected>Select</option>
                     <option value="1">Questionnaire 1</option>
                     <option value="2">Questionnaire 2</option>

@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Questionnaire {
     @JoinColumn(name="admin_id",referencedColumnName="admin_id")
     private Admin admin;
 
-    @OneToMany(mappedBy="questionnaire",targetEntity=Question.class)
+    @OneToMany(mappedBy="questionnaire",fetch = FetchType.LAZY,targetEntity=Question.class)
+    @JsonIgnore
     private List<Question> questions;
 }

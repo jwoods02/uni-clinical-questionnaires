@@ -9,6 +9,7 @@ import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,8 +34,10 @@ public class QuestionnaireController {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
 
-    @RequestMapping(path = "questionnaire/get", method = RequestMethod.GET)
-    public Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response){
-        return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getQuestionnaireId());
+    @RequestMapping(path = "questionnaire/get", method = RequestMethod.POST)
+    public @ResponseBody Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response){
+        System.out.println(getQuestionnaireForm.getId());
+        System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
+        return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 }

@@ -26,7 +26,7 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToOne
-    @JoinColumn(name="question_option")
-    private Option option;
+//    @ManyToOne
+//    @JoinColumn(name="question_option")
+//    private Option option;
 }
