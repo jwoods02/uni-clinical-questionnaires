@@ -17,7 +17,7 @@ public class Question {
     @Id
     @Column(name = "question_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer questionId;
+    private Long questionId;
 
     @Column(name = "question_description")
     private String questionDescription;

@@ -17,7 +17,7 @@ public class Option {
     @Id
     @Column(name = "option_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer optionId;
+    private Long optionId;
 
     @Column(name = "option_description")
     private String optionDescription;

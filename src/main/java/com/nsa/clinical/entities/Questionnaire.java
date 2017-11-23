@@ -18,7 +18,7 @@ public class Questionnaire {
     @Id
     @Column(name = "questionnaire_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer questionnaireId;
+    private Long questionnaireId;
 
     @Column(name = "questionnaire_title")
     private String questionnaireTitle;

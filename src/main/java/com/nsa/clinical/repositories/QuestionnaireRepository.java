@@ -11,6 +11,5 @@ import java.util.List;
  */
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire,Long> {
     List<Questionnaire>findAll();
-    Questionnaire findByQuestionnaireId(int id);
-
+    Questionnaire findByQuestionnaireId(long id);
 }
