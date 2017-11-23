@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by c1673142 on 17-Nov-17.
@@ -39,6 +41,16 @@ public class QuestionnaireController {
         System.out.println(getQuestionnaireForm.getId());
         System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
+    }
+
+    @RequestMapping(path = "/questions", method = RequestMethod.GET)
+    public List<Question> getQuestions(NewQuestionnaireForm newQuestionnaireForm){
+        List<Question> questions = new ArrayList<>();
+        questions.add(new Question ("How Old Are You?"));
+        questions.add(new Question ("What is Your Name?"));
+        questions.add(new Question ("Where Are You From?"));
+
+        return questions;
     }
 
 }
