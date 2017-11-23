@@ -1,10 +1,8 @@
 package com.nsa.clinical.controllers;
 
-import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 import com.nsa.clinical.forms.GetQuestionnaireForm;
 import com.nsa.clinical.forms.NewQuestionnaireForm;
-import com.nsa.clinical.repositories.QuestionRepository;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,7 @@ public class QuestionnaireController {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
 
-    @RequestMapping(path = "questionnaire/get", method = RequestMethod.POST)
+    @RequestMapping(path = "questionnaire/get", method = RequestMethod.GET)
     public @ResponseBody Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response){
         System.out.println(getQuestionnaireForm.getId());
         System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
