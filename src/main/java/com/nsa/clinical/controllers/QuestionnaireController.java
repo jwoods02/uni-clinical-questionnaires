@@ -1,6 +1,6 @@
 package com.nsa.clinical.controllers;
 
-import com.nsa.clinical.entities.Question;
+import com.nsa.clinical.forms.NewOptionForm;
 import com.nsa.clinical.forms.NewQuestionnaireForm;
 import com.nsa.clinical.repositories.QuestionRepository;
 import com.nsa.clinical.services.QuestionnaireService;
@@ -42,4 +42,9 @@ public class QuestionnaireController {
 
         return questions;
     }
+    @RequestMapping(path = "/option/create", method = RequestMethod.POST)
+    public void createOption(NewOptionForm newOptionForm){
+        questionnaireService.newQuestionnaire(newOptionForm.getDescription());
+    }
+
 }

@@ -17,7 +17,7 @@ public class Question {
     @Id
     @Column(name = "question_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer questionId;
+    private Long questionId;
 
     @Column(name = "question_description")
     private String questionDescription;
@@ -26,11 +26,10 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToOne
-    @JoinColumn(name="question_option")
-    private Option option;
+    @ManyToMany
+    @JoinTable(name="question_option",
+            joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
+            inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
+    private List<Option> options;
 
-    public Question (String questionDescription){
-        this.questionDescription = questionDescription;
-    }
 }

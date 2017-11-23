@@ -17,7 +17,7 @@ public class Option {
     @Id
     @Column(name = "option_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer optionId;
+    private Long optionId;
 
     @Column(name = "option_description")
     private String optionDescription;
@@ -25,6 +25,6 @@ public class Option {
     @Column(name = "option_type")
     private String optionType;
 
-    @OneToMany(mappedBy = "option")
+    @ManyToMany(mappedBy = "options")
     private List<Question> questions;
 }
