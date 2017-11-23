@@ -15,15 +15,7 @@ import java.util.List;
 @RestController
 public class QuestionController {
 
-    @RequestMapping(path = "/questions", method = RequestMethod.GET)
-    public List<Question> getQuestions(NewQuestionnaireForm newQuestionnaireForm){
-        List<Question> questions = new ArrayList<>();
-        questions.add(new Question ("How Old Are You?"));
-        questions.add(new Question ("What is Your Name?"));
-        questions.add(new Question ("Where Are You From?"));
 
-        return questions;
-    }
 
 
 }
