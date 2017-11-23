@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <head>
     <meta charset="UTF-8">
-
-    <title>Question Adder</title>
+    <title>Title</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Add and Remove Questions</h1>
 
-    <h1>Add and Remove Questions</h1>
+            <!-- Button Drop Down -->
+            <div class="form-group">
+                <h3>Select a Question</h3>
+                <div class = "form-row">
+                    <select id="questions" class="select form-control" onchange="getSelectValue()">
 
-    <!-- Button Drop Down -->
-    <div class="form-group">
-        <label class="control-label col-md-4">
-            Select a Question
-        </label>
-        <div class = "col-md-4">
-            <select id="questions" class="select form-control" onchange="getSelectValue()">
+                        <option value="Select a Question">
+                            Select a Question
+                        </option>
 
-                <!--<option value="Select a Question">-->
-                    <!--Select a Question -->
-                <!--</option>-->
+                    </select>
+                    <br>
+                    <div class="col-sm-2">
+                        <button id="addBtn" name="Add" class="btn btn-primary">Add</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="delBtn" name="Delete" class="btn btn-primary">Delete</button>
 
-            </select>
-
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
             <div class="questions-list">
-                <div class="question">kdjfkljdfgkl</div>
+                <h1>Questions List</h1>
+                <br>
+                <ul id="Questions_List" class="list-group">
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Multiple Choice</span> When wherwejefkjbcf ofwiufiqweurfweijfjifj cjcjdjdj djdjdjdjdj</li>
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Radio</span>Question 2</li>
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Checkbox</span>Question 3</li>
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Single Line</span>Question 4</li>
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Multi Line</span>Question 5</li>
+                    <li class="list-group-item">
+                        <span class="label label-default label-pill pull-right">Option</span>Question 6</li>
+                </ul>
 
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 <script>
 
@@ -53,7 +81,7 @@
         console.log("FAIL");
     });</script>
 
-    <script>
+<script>
 
     function getSelectValue()
     {
@@ -65,10 +93,17 @@
         // write code to add the new added question to the page
         console.log(selectedValue);
     }
-    console.log("this is working")
+    console.log("this is working");
     getSelectValue();
 
 
+</script>
+
+<script>
+    $( function() {
+        $( "#Questions_List" ).sortable();
+        $( "#Questions_List" ).disableSelection();
+    } );
 </script>
 
 </body>
