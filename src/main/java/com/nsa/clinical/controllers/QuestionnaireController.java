@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by c1673142 on 17-Nov-17.
  */
@@ -30,10 +33,18 @@ public class QuestionnaireController {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
 
+    @RequestMapping(path = "/questions", method = RequestMethod.GET)
+    public List<Question> getQuestions(NewQuestionnaireForm newQuestionnaireForm){
+        List<Question> questions = new ArrayList<>();
+        questions.add(new Question ("How Old Are You?"));
+        questions.add(new Question ("What is Your Name?"));
+        questions.add(new Question ("Where Are You From?"));
+
+        return questions;
+    }
     @RequestMapping(path = "/option/create", method = RequestMethod.POST)
     public void createOption(NewOptionForm newOptionForm){
         questionnaireService.newQuestionnaire(newOptionForm.getDescription());
     }
-
 
 }
