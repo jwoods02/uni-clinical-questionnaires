@@ -32,4 +32,9 @@ public class QuestionnaireImplementation implements QuestionnaireService {
         newQuestionnaire.setQuestionnaireDescription(description);
         questionnaireRepository.saveAndFlush(newQuestionnaire);
     }
+
+    @Override
+    public Questionnaire retrieveQuestionnaire(Long QuestionnaireId){
+        return questionnaireRepository.findByQuestionnaireId(QuestionnaireId);
+    }
 }
