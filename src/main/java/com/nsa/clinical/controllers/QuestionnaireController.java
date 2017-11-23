@@ -2,6 +2,7 @@ package com.nsa.clinical.controllers;
 
 import com.nsa.clinical.entities.Questionnaire;
 import com.nsa.clinical.forms.GetQuestionnaireForm;
+import com.nsa.clinical.forms.NewOptionForm;
 import com.nsa.clinical.forms.NewQuestionnaireForm;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,11 @@ public class QuestionnaireController {
         System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
+
+    @RequestMapping(path = "/option/create", method = RequestMethod.POST)
+    public void createOption(NewOptionForm newOptionForm){
+        questionnaireService.newQuestionnaire(newOptionForm.getDescription());
+    }
+
+
 }
