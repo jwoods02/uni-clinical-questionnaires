@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by c1673142 on 17-Nov-17.
@@ -39,6 +40,11 @@ public class QuestionnaireController {
         System.out.println(getQuestionnaireForm.getId());
         System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
+    }
+
+    @RequestMapping(path = "/preview_questionnaire/find_all", method = RequestMethod.GET)
+    public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
+        return questionnaireService.retrieveAllQuestionnaires();
     }
 
 //    @RequestMapping(path = "/questions", method = RequestMethod.GET)
