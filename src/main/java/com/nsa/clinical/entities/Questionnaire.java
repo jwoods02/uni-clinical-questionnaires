@@ -37,4 +37,12 @@ public class Questionnaire {
     @OneToMany(mappedBy="questionnaire",fetch = FetchType.LAZY,targetEntity=Question.class)
     @JsonIgnore
     private List<Question> questions;
+
+    public Questionnaire() {
+
+    }
+
+    public Questionnaire(String questionnaireTitle) {
+        this.questionnaireTitle = questionnaireTitle;
+    }
 }
