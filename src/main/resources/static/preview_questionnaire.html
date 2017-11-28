@@ -32,7 +32,7 @@
     // Ensures that the drop down is populated with questionnaires as soon as the page loads.
     $(document).ready(function() {
         $.ajax({
-            url: "/api/preview_questionnaire/find_all",
+            url: "/api/preview_questionnaire/get",
             type: "GET",
             dataType: "json"
         }).done(function (data) {

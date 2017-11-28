@@ -40,7 +40,7 @@ public class QuestionnaireController {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 
-    @RequestMapping(path = "/preview_questionnaire/find_all", method = RequestMethod.GET)
+    @RequestMapping(path = "/preview_questionnaire/get", method = RequestMethod.GET)
     public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
         return questionnaireService.retrieveAllQuestionnaires();
     }
