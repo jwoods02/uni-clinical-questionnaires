@@ -5,6 +5,8 @@ import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by c1673142 on 17-Nov-17.
  */
@@ -28,6 +30,11 @@ public class QuestionnaireImplementation implements QuestionnaireService {
     @Override
     public Questionnaire retrieveQuestionnaire(Long QuestionnaireId){
         return questionnaireRepository.findByQuestionnaireId(QuestionnaireId);
+    }
+
+    @Override
+    public List<Questionnaire> retrieveAllQuestionnaires () {
+        return questionnaireRepository.findAll();
     }
 
 }

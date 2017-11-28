@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by c1673142 on 17-Nov-17.
@@ -27,16 +28,20 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
-    @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm) {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
 
-    @RequestMapping(path = "/questionnaire", method = RequestMethod.GET)
+    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.GET)
     public
     @ResponseBody
     Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response) {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 
+    @RequestMapping(path = "/preview_questionnaire/find_all", method = RequestMethod.GET)
+    public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
+        return questionnaireService.retrieveAllQuestionnaires();
+    }
 }
