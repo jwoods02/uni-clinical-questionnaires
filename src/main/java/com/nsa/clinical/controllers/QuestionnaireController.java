@@ -28,12 +28,12 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
-    @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm) {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
 
-    @RequestMapping(path = "/questionnaire", method = RequestMethod.GET)
+    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.GET)
     public
     @ResponseBody
     Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response) {
