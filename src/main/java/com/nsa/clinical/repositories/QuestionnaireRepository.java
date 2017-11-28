@@ -13,4 +13,6 @@ public interface QuestionnaireRepository extends JpaRepository<Questionnaire,Lon
     List<Questionnaire>findAll();
 
     Questionnaire findByQuestionnaireId(long id);
+
+    void deleteByQuestionnaireId(Long id);
 }

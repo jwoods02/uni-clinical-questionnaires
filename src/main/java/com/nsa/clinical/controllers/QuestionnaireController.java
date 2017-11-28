@@ -40,8 +40,13 @@ public class QuestionnaireController {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 
-    @RequestMapping(path = "/preview_questionnaire/get", method = RequestMethod.GET)
+    @RequestMapping(path = "/questionnaire/allQuestionnaires/get", method = RequestMethod.GET)
     public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
         return questionnaireService.retrieveAllQuestionnaires();
+    }
+
+    @RequestMapping(path = "/questionnaire/delete", method = RequestMethod.POST)
+    public void deleteQuestionnaire(Long id) {
+        questionnaireService.deleteQuestionnaire(id);
     }
 }
