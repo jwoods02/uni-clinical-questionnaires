@@ -36,19 +36,7 @@ public class QuestionnaireController {
     public
     @ResponseBody
     Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(getQuestionnaireForm.getId());
-        System.out.println(questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId()).getQuestionnaireDescription());
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
-
-//    @RequestMapping(path = "/questions", method = RequestMethod.GET)
-//    public List<Question> getQuestions(NewQuestionnaireForm newQuestionnaireForm){
-//        List<Question> questions = new ArrayList<>();
-//        questions.add(new Question ("How Old Are You?"));
-//        questions.add(new Question ("What is Your Name?"));
-//        questions.add(new Question ("Where Are You From?"));
-//
-//        return questions;
-//    }
 
 }
