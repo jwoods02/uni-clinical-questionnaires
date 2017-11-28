@@ -36,7 +36,7 @@ public class TestQuestionnaireAPI {
     private QuestionnaireService questionnaireService;
 
     @Test
-    public void expectToSeeAllCharityNamesInResponse() throws Exception {
+    public void expectToSeeAllQuestionnaireInResponse() throws Exception {
 
         Questionnaire a = new Questionnaire("Questionnaire 1");
         Questionnaire b = new Questionnaire("Questionnaire 2");
@@ -46,7 +46,7 @@ public class TestQuestionnaireAPI {
 
         given(this.questionnaireService.retrieveAllQuestionnaires()).willReturn(testList);
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/preview_questionnaire/find_all").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/api/preview_questionnaire/get").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Questionnaire 1")))
                 .andExpect(content().string(containsString("Questionnaire 2")))
