@@ -28,7 +28,7 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
-    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire/create", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm) {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
@@ -40,7 +40,7 @@ public class QuestionnaireController {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 
-    @RequestMapping(path = "/preview_questionnaire/find_all", method = RequestMethod.GET)
+    @RequestMapping(path = "/preview_questionnaire/get", method = RequestMethod.GET)
     public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
         return questionnaireService.retrieveAllQuestionnaires();
     }
