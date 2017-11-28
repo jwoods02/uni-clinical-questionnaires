@@ -28,7 +28,7 @@ public class QuestionnaireController {
         this.questionnaireService = questionnaireService;
     }
 
-    @RequestMapping(path = "/questionnaire/get", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire/create", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm) {
         questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
     }
