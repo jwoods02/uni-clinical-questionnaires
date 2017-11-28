@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Admin {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy="admin",targetEntity=Questionnaire.class)
+    @OneToMany(mappedBy="admin",fetch = FetchType.LAZY, targetEntity=Questionnaire.class)
+    @JsonIgnore
     private List<Questionnaire> questionnaires;
 }
