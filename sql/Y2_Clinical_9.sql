@@ -37,7 +37,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`options` (
   `option_id` INT(11) NOT NULL auto_increment,
   `option_description` TEXT NULL DEFAULT NULL,
-  `option_type` VARCHAR(45) NULL DEFAULT NULL,
+  `option_type` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`option_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
