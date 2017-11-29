@@ -37,4 +37,9 @@ public class QuestionnaireImplementation implements QuestionnaireService {
         return questionnaireRepository.findAll();
     }
 
+    @Override
+    public void deleteQuestionnaire(Long id) {
+        questionnaireRepository.delete(id);
+    }
+
 }

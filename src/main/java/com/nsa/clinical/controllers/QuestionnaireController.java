@@ -1,10 +1,14 @@
 package com.nsa.clinical.controllers;
 
+import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 import com.nsa.clinical.forms.GetQuestionnaireForm;
 import com.nsa.clinical.forms.NewQuestionnaireForm;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,8 +44,19 @@ public class QuestionnaireController {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
     }
 
-    @RequestMapping(path = "/preview_questionnaire/get", method = RequestMethod.GET)
+    @RequestMapping(path = "/questionnaire/allQuestionnaires/get", method = RequestMethod.GET)
     public @ResponseBody List<Questionnaire> getAllStoredQuestionnaires(){
         return questionnaireService.retrieveAllQuestionnaires();
+    }
+
+    @RequestMapping(path = "/questionnaire/delete", method = RequestMethod.POST)
+    public void deleteQuestionnaire(Long id) {
+        Questionnaire questionnaire = questionnaireService.retrieveQuestionnaire(id);
+
+        if (questionnaire != null) {
+            questionnaireService.deleteQuestionnaire(questionnaire.getQuestionnaireId());
+        } else {
+            throw new ResourceNotFoundException();
+        }
     }
 }
