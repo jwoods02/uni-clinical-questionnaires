@@ -23,7 +23,7 @@ public class Option {
     private String optionDescription;
 
     @Column(name = "option_type")
-    private String optionType;
+    private Integer optionType;
 
     @ManyToMany(mappedBy = "options")
     private List<Question> questions;
