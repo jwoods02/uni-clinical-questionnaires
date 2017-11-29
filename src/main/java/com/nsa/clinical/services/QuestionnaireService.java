@@ -15,4 +15,6 @@ public interface QuestionnaireService {
 
     List<Questionnaire> retrieveAllQuestionnaires();
 
+    void deleteQuestionnaire(Long id);
+
 }
