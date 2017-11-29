@@ -17,7 +17,7 @@
 <div class="container">
     <h1>Questionnaire Editor</h1>
     <p>Please select an existing questionnaire from the drop down menu to edit or delete it.</p>
-    <form action="/api/questionnaire/delete" method="POST">
+    <form action="/api/questionnaire/delete" method="POST" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
         <div class="form-row">
             <div class="col-md-6">
                 <label class="sr-only" for="select_questionnaire">Select</label>
