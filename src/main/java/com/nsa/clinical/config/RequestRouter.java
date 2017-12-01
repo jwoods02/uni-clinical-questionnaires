@@ -17,6 +17,7 @@ public class RequestRouter extends WebMvcConfigurerAdapter {
         registry.addViewController("/api/create_question/**").setViewName("forward:/create_question.html");
         registry.addViewController("/api/create_questionnaire/**").setViewName("forward:/create_questionnaire.html");
         registry.addViewController("/api/edit_questionnaire/**").setViewName("forward:/edit_questionnaire.html");
+        registry.addViewController("/api/edit_question/**").setViewName("forward:/edit_question.html");
         registry.addViewController("/api/preview_questionnaire/**").setViewName("forward:/preview_questionnaire.html");
     }
 }
