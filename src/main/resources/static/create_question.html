@@ -6,6 +6,7 @@
     <title>Create New Question</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
@@ -40,25 +41,30 @@
 
                 <div class="form-group">
                     <label class="control-label" for="selectType">Question Type</label>
-                    <select class="select form-control" id="selectType" name="selectType">
-                        <option value="Select an Option">
+                    <select class="select form-control" id="selectType" name="selectType" onchange="onOptionChange()" required>
+                        <option value="">
                             Select a Question Type
                         </option>
-                        <option value="Radio Button">
+                        <option value="radio_button">
                             Radio Buttons
                         </option>
-                        <option value="Single Line">
+                        <option value="single_line">
                             Single Line Answer
                         </option>
-                        <option value="Multi-Line">
+                        <option value="multi_line">
                             Multi-Line Answer
                         </option>
-                        <option value="Multi-Line">
-                            Multiple Choice
+                        <option value="check_boxes">
+                            Checkboxes
                         </option>
                     </select>
                 </div>
 
+                <!-- Options inserted here individually -->
+                <div id="addNewOptionsHere"></div>
+
+                <!-- Buttons inserted here when needed -->
+                <div class="form-group" id="addOptionsButtonHere"></div>
 
 
                 <!-- Submit button -->
@@ -70,114 +76,56 @@
         </form>
     </div>
 </div>
-<div class="container">
 
+<!-- ======================================== Option templates ======================================================-->
 
-    <form class="form" method="post" action="/api/option">
-        <fieldset>
-
-            <!-- Add Option Form -->
-            <h1>Add Option</h1>
-
-            <!-- Option Description -->
-            <div class="form-group">
-                <label class="control-label" for="optionDescription">Option Description</label>
-                <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
-                <span class="help-block">Write the option description here</span>
-            </div>
-
-            <!-- Button Drop Down -->
-            <div class="form-group">
-                <!--<label class="control-label" for="addOption">-->
-                Select an Option
-                </label>
-                <select class="select form-control" id="selectOption" name="addOption">
-
-                    <option value="Select an Option">
-                        Select an Option
-                    </option>
-                    <option value="Radio Button">
-                        Radio Button
-                    </option>
-                    <option value="Single Line">
-                        Single Line
-                    </option>
-                    <option value="Multi-Line">
-                        Multi-Line
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
-                <button name="submit" class="btn btn-primary">Submit</button>
-            </div>
-
-            <!-- Button -->
-            <!--<div class="form-group">-->
-            <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
-            <!--</div>-->
-
-        </fieldset>
-    </form>
-    <div id="addNewOptionsHere"></div>
-    <form>
-        <button id="addOptionForm" name="addOptionForm" class="btn btn-outline-primary btn-block" type="button">Add New Option</button>
-    </form>
-</div>
+<div class="hide" id="radio_buttons_template">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
+            <input class="form-control" type="text" placeholder="Option Description">
+        </div>
+    </div>
 </div>
 
-<div class="hide" id="new-option-template">
-    <form class="form" method="post" action="/api/option">
-        <br>
-
-        <fieldset>
-
-            <!-- Add Option Form -->
-            <h1>Add Option</h1>
-
-            <!-- Option Description-->
-            <div class="form-group">
-                <label class="control-label" for="optionDescription">Option Description</label>
-                <input id="optionDescription" name="description" type="text" placeholder="Option Description" class="form-control input-md">
-                <span class="help-block">Write the option description here</span>
-            </div>
-
-            <!-- Button Drop Down -->
-            <div class="form-group">
-                <!--<label class="control-label" for="addOption">-->
-                Select an Option
-                </label>
-                <select class="select form-control" id="selectOption" name="type">
-
-                    <option value="">
-                        Select an Option
-                    </option>
-                    <option value="1">
-                        Radio Button
-                    </option>
-                    <option value="2">
-                        Single Line
-                    </option>
-                    <option value="3">
-                        Multi-Line
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
-                <button name="submit" class="btn btn-primary">Submit</button>
-            </div>
-
-            <!-- Button -->
-            <!--<div class="form-group">-->
-            <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
-            <!--</div>-->
-
-        </fieldset>
-    </form>
+<div class="hide" id="single_line_template">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            <input class="form-control" type="text" disabled>
+        </div>
+    </div>
 </div>
+
+<div class="hide" id="multi_line_template">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            <textarea class="form-control" rows="3" disabled></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="hide" id="check_boxes_template">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-square-o" aria-hidden="true"></i></span>
+            <input class="form-control" type="text" placeholder="Option Description">
+        </div>
+    </div>
+</div>
+
+<!-- ======================================== Button templates ======================================================-->
+
+<div class="hide" id="add_radio_option_template">
+    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addRadioOption()">Add Option</button>
+</div>
+
+<div class="hide" id="add_checkbox_template">
+    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addCheckboxOption()">Add Option</button>
+</div>
+
+
 
 <script src="../js/templates.js"></script>
 
@@ -185,17 +133,37 @@
 
 <script>
 
-    var optionNumber = 0;
+    // Load templates depending on option type
+    function onOptionChange() {
+        if(document.getElementById('selectType').value === "radio_button") {
+            $('#addNewOptionsHere').empty().append($("#radio_buttons_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_radio_option_template").html());
+        } else if (document.getElementById('selectType').value === "single_line") {
+            $('#addNewOptionsHere').empty().append($("#single_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (document.getElementById('selectType').value === "multi_line") {
+            $('#addNewOptionsHere').empty().append($("#multi_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (document.getElementById('selectType').value === "check_boxes") {
+            $('#addNewOptionsHere').empty().append($("#check_boxes_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_checkbox_template").html());
+        }
+    }
 
-    $("#addOptionForm").click(function(){
-        $("#addNewOptionsHere").append($("#new-option-template").html());
-        optionNumber += 1;
-    });
+    // Adds a new radio button
+    function addRadioOption() {
+        $("#addNewOptionsHere").append($("#radio_buttons_template").html());
+    }
 
-    $(document.body).on('click', '.deleteOption' ,function(){
-        $(this).closest('.form').remove();
-        optionNumber -= 1;
-    });
+    // Adds a new checkbox option
+    function addCheckboxOption() {
+        $("#addNewOptionsHere").append($("#check_boxes_template").html());
+    }
+
+    function removeOption() {
+
+    }
+
 
 
 
