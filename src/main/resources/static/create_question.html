@@ -6,7 +6,7 @@
     <title>Create New Question</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
@@ -80,10 +80,15 @@
 <!-- ======================================== Option templates ======================================================-->
 
 <div class="hide" id="radio_buttons_template">
-    <div class="form-group">
+    <div class="form-group" id="option">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-circle-o" aria-hidden="true"></i></span>
             <input class="form-control" type="text" placeholder="Option Description">
+            <span class="input-group-btn">
+                <button class="btn btn-danger removeOption" type="button" onclick="removeOption()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </span>
         </div>
     </div>
 </div>
@@ -107,10 +112,15 @@
 </div>
 
 <div class="hide" id="check_boxes_template">
-    <div class="form-group">
+    <div class="form-group" id="option">
         <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-square-o" aria-hidden="true"></i></span>
             <input class="form-control" type="text" placeholder="Option Description">
+            <span class="input-group-btn">
+                <button class="btn btn-danger removeOption" type="button" onclick="removeOption()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </span>
         </div>
     </div>
 </div>
@@ -135,7 +145,10 @@
 
     // Load templates depending on option type
     function onOptionChange() {
-        if(document.getElementById('selectType').value === "radio_button") {
+        if (document.getElementById('selectType').value === "") {
+            $('#addNewOptionsHere').empty();
+            $('#addOptionsButtonHere').empty();
+        } else if(document.getElementById('selectType').value === "radio_button") {
             $('#addNewOptionsHere').empty().append($("#radio_buttons_template").html());
             $('#addOptionsButtonHere').empty().append($("#add_radio_option_template").html());
         } else if (document.getElementById('selectType').value === "single_line") {
@@ -160,9 +173,9 @@
         $("#addNewOptionsHere").append($("#check_boxes_template").html());
     }
 
-    function removeOption() {
-
-    }
+    $(document.body).on('click', '.removeOption' ,function(){
+        $(this).closest('.form-group').remove();
+    });
 
 
 
