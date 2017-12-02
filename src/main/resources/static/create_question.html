@@ -16,87 +16,115 @@
     .hide {
         display: none;
     }
+
+    body {
+        padding-bottom: 10px;
+    }
 </style>
 <body>
 
-    <div id="navbar-template"></div>
+<div id="navbar-template"></div>
 
-    <div class="jumbotron">
-        <div class="container">
-            <form class="form" method="post" action="/api/question">
-                <fieldset>
-                    <!-- Create Question Form -->
-                    <h1>Create New Question</h1>
-
-                    <!-- Question-->
-                    <div class="form-group">
-                        <label class="control-label" for="description">Question Description</label>
-                        <input id="description" name="description" type="text" placeholder="Question Description" class="form-control input-md">
-                        <span class="help-block">Write your question here</span>
-                    </div>
-
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        <button id="submit" name="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
-                </fieldset>
-            </form>
-        </div>
-    </div>
+<div class="jumbotron">
     <div class="container">
-        <form class="form" method="post" action="/api/option">
+        <form class="form" method="post" action="/api/question">
             <fieldset>
+                <!-- Create Question Form -->
+                <h1>Create New Question</h1>
 
-                <!-- Add Option Form -->
-                <h1>Add Option</h1>
-
-                <!-- Option Description -->
+                <!-- Question-->
                 <div class="form-group">
-                    <label class="control-label" for="optionDescription">Option Description</label>
-                    <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
-                    <span class="help-block">Write the option description here</span>
+                    <label class="control-label" for="description">Question Description</label>
+                    <input id="description" name="description" type="text" placeholder="Question Description" class="form-control input-md">
                 </div>
 
-                <!-- Button Drop Down -->
                 <div class="form-group">
-                    <!--<label class="control-label" for="addOption">-->
-                        Select an Option
-                    </label>
-                    <select class="select form-control" id="selectOption" name="addOption">
-
+                    <label class="control-label" for="selectType">Question Type</label>
+                    <select class="select form-control" id="selectType" name="selectType">
                         <option value="Select an Option">
-                            Select an Option
+                            Select a Question Type
                         </option>
                         <option value="Radio Button">
-                            Radio Button
+                            Radio Buttons
                         </option>
                         <option value="Single Line">
-                            Single Line
+                            Single Line Answer
                         </option>
                         <option value="Multi-Line">
-                            Multi-Line
+                            Multi-Line Answer
+                        </option>
+                        <option value="Multi-Line">
+                            Multiple Choice
                         </option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
-                    <button name="submit" class="btn btn-primary">Submit</button>
-                </div>
 
-                <!-- Button -->
-                <!--<div class="form-group">-->
-                    <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
-                <!--</div>-->
+
+                <!-- Submit button -->
+                <div class="form-group">
+                    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+                </div>
 
             </fieldset>
         </form>
-        <div id="addNewOptionsHere"></div>
-        <form>
-            <button id="addOptionForm" name="addOptionForm" class="btn btn-outline-primary btn-block" type="button">Add New Option</button>
-        </form>
     </div>
+</div>
+<div class="container">
+
+
+    <form class="form" method="post" action="/api/option">
+        <fieldset>
+
+            <!-- Add Option Form -->
+            <h1>Add Option</h1>
+
+            <!-- Option Description -->
+            <div class="form-group">
+                <label class="control-label" for="optionDescription">Option Description</label>
+                <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
+                <span class="help-block">Write the option description here</span>
+            </div>
+
+            <!-- Button Drop Down -->
+            <div class="form-group">
+                <!--<label class="control-label" for="addOption">-->
+                Select an Option
+                </label>
+                <select class="select form-control" id="selectOption" name="addOption">
+
+                    <option value="Select an Option">
+                        Select an Option
+                    </option>
+                    <option value="Radio Button">
+                        Radio Button
+                    </option>
+                    <option value="Single Line">
+                        Single Line
+                    </option>
+                    <option value="Multi-Line">
+                        Multi-Line
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
+                <button name="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+            <!-- Button -->
+            <!--<div class="form-group">-->
+            <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
+            <!--</div>-->
+
+        </fieldset>
+    </form>
+    <div id="addNewOptionsHere"></div>
+    <form>
+        <button id="addOptionForm" name="addOptionForm" class="btn btn-outline-primary btn-block" type="button">Add New Option</button>
+    </form>
+</div>
 </div>
 
 <div class="hide" id="new-option-template">
@@ -151,7 +179,7 @@
     </form>
 </div>
 
-    <script src="../js/templates.js"></script>
+<script src="../js/templates.js"></script>
 
 
 
@@ -171,37 +199,37 @@
 
 
 
-//    $('#submit').submit(function(event) {
-//
-//        var formData = {
-//            'description'              : $('input[name=description]').val()
-//        };
-//
-//        $.ajax({
-//            type        : 'POST',
-//            url         : '/api/questionnaire/create',
-//            data        : formData,
-//            dataType    : 'json',
-//            async       : 'false'
-//        })
-//        // using the done promise callback
-//            .done(function(data) {
-//                for (i = 0; i < optionNumber; i++) {
-//
-//                }
-//
-//                });
-//
-//            // using the fail promise callback
-//            .fail(function(data) {
-//
-//                // show any errors
-//                // best to remove for production
-//                console.log(data);
-//            });
-//
-//
-//    });
+    //    $('#submit').submit(function(event) {
+    //
+    //        var formData = {
+    //            'description'              : $('input[name=description]').val()
+    //        };
+    //
+    //        $.ajax({
+    //            type        : 'POST',
+    //            url         : '/api/questionnaire/create',
+    //            data        : formData,
+    //            dataType    : 'json',
+    //            async       : 'false'
+    //        })
+    //        // using the done promise callback
+    //            .done(function(data) {
+    //                for (i = 0; i < optionNumber; i++) {
+    //
+    //                }
+    //
+    //                });
+    //
+    //            // using the fail promise callback
+    //            .fail(function(data) {
+    //
+    //                // show any errors
+    //                // best to remove for production
+    //                console.log(data);
+    //            });
+    //
+    //
+    //    });
 
 
 </script>
