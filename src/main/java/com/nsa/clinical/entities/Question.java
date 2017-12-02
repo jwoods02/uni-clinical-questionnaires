@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Question {
     @Column(name = "question_description")
     private String questionDescription;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;

@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Option {
     @Column(name = "option_type")
     private Integer optionType;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "options")
     private List<Question> questions;
 }
