@@ -17,20 +17,21 @@
 <div class="container">
     <h1>Question Editor</h1>
     <p>Please select an existing question from the drop down menu to edit or delete it.</p>
-    <!--<form action="/api/questionnaire/delete" method="POST" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">-->
-        <!--<div class="form-row">-->
-            <!--<div class="col-md-6">-->
-                <!--<label class="sr-only" for="select_question">Select</label>-->
-                <!--<select required class="form-control" id="select_question" name="id">-->
-                    <!--<option value="" selected>Select</option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-md-2">-->
-                <!--<button type="button" class="btn btn-primary">Edit</button>-->
-                <!--<button type="submit" class="btn btn-danger">Delete</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
+    <!--<form action="/api/question/delete" method="POST" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">-->
+    <form>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label class="sr-only" for="select_question">Select</label>
+                <select required class="form-control" id="select_question" name="id">
+                    <option value="" selected>Select</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script src="../js/templates.js"></script>
@@ -38,24 +39,27 @@
 <script>
 
 
-    // Ensures that the drop down is populated with questionnaires as soon as the page loads.
+    // Ensures that the drop down is populated with questions as soon as the page loads.
     $(document).ready(function() {
         $.ajax({
-            url: "/api/questionnaire/allQuestions/get",
+            url: "/api/question/allQuestions/get",
             type: "GET",
             dataType: "json"
         }).done(function (data) {
-            // Iterates each questionnaire object and appends a new option to the drop down with value set as id
+            // Iterates each question object and appends a new option to the drop down with value set as id
             data.forEach(function (question) {
-                $("#select_question").append($("<option/>", {
-                    value: question.questionId,
-                    text: question.question_description
-                }));
+                var option = $(".template option").clone();
+                option.attr("value", question.questionId);
+                option.html(question.questionDescription);
+                $("#select_question").append(option);
             });
-        })
+        });
     });
 
 </script>
+<div class = "template" style="display:none;">
+    <option value="" selected>Select</option>
+</div>
 
 </body>
 </html>
