@@ -1,0 +1,14 @@
+.hide {
+    display: none;
+}
+
+body {
+    padding-bottom: 10px;
+}
+.input-group {
+    padding: 2px;
+}
+
+span, button:hover {
+    cursor: pointer;
+}
