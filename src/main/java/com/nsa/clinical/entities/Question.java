@@ -27,7 +27,7 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @OneToMany(mappedBy="options", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,targetEntity=Option.class)
+    @OneToMany(mappedBy="question", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,targetEntity=Option.class)
     @JsonIgnore
     private List<Option> options;
 

@@ -86,9 +86,7 @@
             </fieldset>
         </form>
         <!-- Submit button -->
-        <div class="form-group">
-            <button id="submit" name="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <button id="submit" name="submit" class="btn btn-primary" onclick="submitForm()">Submit</button>
     </div>
 </div>
 
@@ -97,7 +95,7 @@
 <div class="hide" id="radio_buttons_template">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-        <input class="form-control" type="text" placeholder="Option Description">
+        <input class="form-control orderedOptions" type="text" placeholder="Option Description">
         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -123,7 +121,7 @@
 <div class="hide" id="check_boxes_template">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-        <input class="form-control" type="text" placeholder="Option Description">
+        <input class="form-control orderedOptions" type="text" placeholder="Option Description">
         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -193,41 +191,37 @@
 
 
 
+    // Set id's for template children before submit
+    var ancestor = document.getElementById('listWithHandle'),
+        descendents = ancestor.getElementsByClassName('orderedOptions');
 
-    //    $('#submit').submit(function(event) {
-    //
+    submitForm = function(){
+    // Post question form first
+    $('#questionForm').submit(function() {
+        var questionFormData = {
+            'questionDescription': $('input[name=questionDescription]').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/api/question",
+            data: questionFormData,
+            dataType: "json",
 
-
-
-    //        var questionFormData = {
-    //            'questionDescription'              : $('input[name=questionDescription]').val()
-    //        };
-    //
-    //        $.ajax({
-    //            type        : 'POST',
-    //            url         : '/api/questionnaire/create',
-    //            data        : formData,
-    //            dataType    : 'json',
-    //            async       : 'false'
-    //        })
-    //        // using the done promise callback
-    //            .done(function(data) {
-    //                for (i = 0; i < optionNumber; i++) {
-    //
-    //                }
-    //
-    //                });
-    //
-    //            // using the fail promise callback
-    //            .fail(function(data) {
-    //
-    //                // show any errors
-    //                // best to remove for production
-    //                console.log(data);
-    //            });
-    //
-    //
-    //    });
+            //When first form has posted successfully, post options form
+            success: function () {
+                $("#optionForm").submit();
+                var optionFormData = {
+                    'optionType': $('input[name=selectType]').val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/option",
+                    data: optionFormData,
+                    dataType: "json"
+                })
+            }
+        });
+    });
 
 
 </script>
