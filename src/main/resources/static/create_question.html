@@ -25,8 +25,16 @@
         padding: 2px;
     }
 
-    span, button:hover {
+    button:hover {
         cursor: pointer;
+    }
+
+    span:hover {
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+
     }
 </style>
 <body>
@@ -35,17 +43,20 @@
 
 <div class="jumbotron">
     <div class="container">
-        <form class="form" method="post" action="/api/question">
+        <h1>Create New Question</h1>
+        <form class="form" id="questionForm" method="post" action="/api/question">
             <fieldset>
-                <!-- Create Question Form -->
-                <h1>Create New Question</h1>
 
                 <!-- Question-->
                 <div class="form-group">
-                    <label class="control-label" for="description">Question Description</label>
-                    <input id="description" name="description" type="text" placeholder="Question Description" class="form-control input-md">
+                    <label class="control-label" for="questionDescription">Question Description</label>
+                    <input id="questionDescription" name="questionDescription" type="text" placeholder="Question Description" class="form-control input-md">
                 </div>
+            </fieldset>
+        </form>
 
+        <form class="optionForm" id="optionForm" method="post" action="/api/option">
+            <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="selectType">Answer Type</label>
                     <select class="select form-control" id="selectType" name="selectType" onchange="onOptionChange()" required>
@@ -72,14 +83,12 @@
 
                 <!-- Options inserted here individually -->
                 <div class="form-group" id="listWithHandle"></div>
-
-                <!-- Submit button -->
-                <div class="form-group">
-                    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
-                </div>
-
             </fieldset>
         </form>
+        <!-- Submit button -->
+        <div class="form-group">
+            <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
 </div>
 
@@ -141,7 +150,7 @@
 
 <script>
 
-    // Load templates depending on option type
+    // Load templates depending on selected option type
     function onOptionChange() {
         if (document.getElementById('selectType').value === "") {
             $('#listWithHandle').empty();
@@ -175,6 +184,7 @@
         $(this).closest('.input-group').remove();
     });
 
+    // Referenced from: https://github.com/RubaXa/Sortable/blob/master/README.md
     Sortable.create(listWithHandle, {
         handle: '.input-group-addon',
         cursor: 'move',
@@ -186,8 +196,11 @@
 
     //    $('#submit').submit(function(event) {
     //
-    //        var formData = {
-    //            'description'              : $('input[name=description]').val()
+
+
+
+    //        var questionFormData = {
+    //            'questionDescription'              : $('input[name=questionDescription]').val()
     //        };
     //
     //        $.ajax({

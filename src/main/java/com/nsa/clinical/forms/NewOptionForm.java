@@ -1,5 +1,6 @@
 package com.nsa.clinical.forms;
 
+import com.nsa.clinical.entities.Question;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewOptionForm {
-    private String description;
-    private Integer type;
+    private Integer optionType;
+    private String optionDescription;
+    private Integer optionOrder;
+    private Question question;
 }

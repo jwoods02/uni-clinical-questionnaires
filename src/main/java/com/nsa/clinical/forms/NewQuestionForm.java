@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewQuestionForm {
-    private String description;
+    private String questionDescription;
     private Questionnaire questionnaire;
 }
