@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Latest compiled and minified CSS -->
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Question</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</head>
+
+<style>
+    .hide {
+        display: none;
+    }
+    .card {
+        margin-bottom: 15px;
+    }
+    .question-canvas {
+        min-height: 50vh;
+    }
+</style>
+<body>
+
+<div id="navbar-template"></div>
+
+<div class="jumbotron">
+    <div class="container">
+        <form class="form" method="post" action="/api/question">
+            <fieldset>
+                <!-- Create Question Form -->
+                <h1>Create New Questionnaire</h1>
+
+                <!-- Question-->
+                <div class="form-group">
+                    <label class="control-label" for="description">Questionnaire Title</label>
+                    <input id="description" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
+                    <span class="help-block">Write tthe questionnaire title here</span>
+                </div>
+
+                <!-- Submit button -->
+                <div class="form-group">
+                    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 text-center question-list connected-sortable">
+            <div class="card ui-state-default">
+                <div class="card-block">
+                    <h5 class="card-title">Multiple Choice</h5>
+                </div>
+            </div>
+            <div class="card ui-state-default">
+                <div class="card-block">
+                    <h5 class="card-title">Radio Button</h5>
+                </div>
+            </div>
+            <div class="card ui-state-default">
+                <div class="card-block">
+                    <h5 class="card-title">Single Line Answer</h5>
+                </div>
+            </div>
+            <div class="card ui-state-default">
+                <div class="card-block">
+                    <h5 class="card-title">Multiple Line Answer</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card question-canvas connected-sortable">
+                <div class="card-block">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="../js/templates.js"></script>
+
+
+<script>
+
+    $( function() {
+        $( ".question-list, .question-canvas" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    } );
+
+    var optionNumber = 0;
+
+    $("#addOptionForm").click(function(){
+        $("#addNewOptionsHere").append($("#new-option-template").html());
+        optionNumber += 1;
+    });
+
+    $(document.body).on('click', '.deleteOption' ,function(){
+        $(this).closest('.form').remove();
+        optionNumber -= 1;
+    });
+
+
+
+</script>
+</body>
+</html>
