@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Create New Question</title>
 
-    <link rel="stylesheet" href="css/custom-css.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -14,6 +13,22 @@
     <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
 
 </head>
+<style>
+    .hide {
+        display: none;
+    }
+
+    body {
+        padding-bottom: 10px;
+    }
+    .input-group {
+        padding: 2px;
+    }
+
+    span, button:hover {
+        cursor: pointer;
+    }
+</style>
 <body>
 
 <div id="navbar-template"></div>
@@ -32,21 +47,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="selectType">Question Type</label>
+                    <label class="control-label" for="selectType">Answer Type</label>
                     <select class="select form-control" id="selectType" name="selectType" onchange="onOptionChange()" required>
                         <option value="">
-                            Select a Question Type
+                            Select an Answer Type
                         </option>
-                        <option value="radio_button">
+                        <option value="1">
                             Radio Buttons
                         </option>
-                        <option value="single_line">
+                        <option value="2">
                             Single Line Answer
                         </option>
-                        <option value="multi_line">
+                        <option value="3">
                             Multi-Line Answer
                         </option>
-                        <option value="check_boxes">
+                        <option value="4">
                             Checkboxes
                         </option>
                     </select>
@@ -131,16 +146,16 @@
         if (document.getElementById('selectType').value === "") {
             $('#listWithHandle').empty();
             $('#addOptionsButtonHere').empty();
-        } else if(document.getElementById('selectType').value === "radio_button") {
+        } else if(document.getElementById('selectType').value === "1") {
             $('#listWithHandle').empty().append($("#radio_buttons_template").html());
             $('#addOptionsButtonHere').empty().append($("#add_radio_option_template").html());
-        } else if (document.getElementById('selectType').value === "single_line") {
+        } else if (document.getElementById('selectType').value === "2") {
             $('#listWithHandle').empty().append($("#single_line_template").html());
             $('#addOptionsButtonHere').empty()
-        } else if (document.getElementById('selectType').value === "multi_line") {
+        } else if (document.getElementById('selectType').value === "3") {
             $('#listWithHandle').empty().append($("#multi_line_template").html());
             $('#addOptionsButtonHere').empty()
-        } else if (document.getElementById('selectType').value === "check_boxes") {
+        } else if (document.getElementById('selectType').value === "4") {
             $('#listWithHandle').empty().append($("#check_boxes_template").html());
             $('#addOptionsButtonHere').empty().append($("#add_checkbox_template").html());
         }

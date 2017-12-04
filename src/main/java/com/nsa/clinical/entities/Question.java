@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,10 +27,8 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToMany
-    @JoinTable(name="question_option",
-            joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
-            inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
+    @OneToMany(mappedBy="options", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,targetEntity=Option.class)
+    @JsonIgnore
     private List<Option> options;
 
 }
