@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
@@ -20,8 +21,11 @@
     .card {
         margin-bottom: 15px;
     }
-    .question-canvas {
+    .canvas-card {
         min-height: 50vh;
+    }
+    li {
+        text-decoration: none;
     }
 </style>
 <body>
@@ -53,34 +57,34 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3 text-center question-list connected-sortable">
-            <div class="card ui-state-default">
-                <div class="card-block">
+        <ul id="sortable" class="col-md-3 text-center connected-sortable">
+            <li class="card ui-state-default">
+                <div class="card-block multiple-choice">
                     <h5 class="card-title">Multiple Choice</h5>
                 </div>
-            </div>
-            <div class="card ui-state-default">
-                <div class="card-block">
+            </li>
+            <li class="card ui-state-default">
+                <div class="card-block radio-button">
                     <h5 class="card-title">Radio Button</h5>
                 </div>
-            </div>
-            <div class="card ui-state-default">
+            </li>
+            <li class="card ui-state-default single-line">
                 <div class="card-block">
                     <h5 class="card-title">Single Line Answer</h5>
                 </div>
-            </div>
-            <div class="card ui-state-default">
-                <div class="card-block">
+            </li>
+            <li class="card ui-state-default">
+                <div class="card-block multi-line">
                     <h5 class="card-title">Multiple Line Answer</h5>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
         <div class="col-md-9">
-            <div class="card question-canvas connected-sortable">
+            <ul id="sortable2" class="card canvas-card sortable2 connected-sortable">
                 <div class="card-block">
 
                 </div>
-            </div>
+            </ul>
 
         </div>
     </div>
@@ -92,11 +96,58 @@
 
 <script>
 
-    $( function() {
-        $( ".question-list, .question-canvas" ).sortable({
-            connectWith: ".connectedSortable"
-        }).disableSelection();
-    } );
+//    $( function() {
+//        $( ".question-list, .question-canvas" ).sortable({
+//            connectWith: ".connected-sortable",
+//            helper: "clone",
+//            start: function (event, ui) {
+//                $(ui.item).show();
+//                clone = $(ui.item).clone();
+//                before = $(ui.item).prev();
+//                parent = $(ui.item).parent();
+//
+//            },
+//            receive: function (event, ui) { //only when dropped from one to another!
+//                if (before.length) before.after(clone);
+//                else parent.prepend(clone);
+//            }
+//        }).disableSelection();
+//
+//
+//    } );
+
+    var sort1 = document.getElementById('sortable');
+    var sort2 = document.getElementById('sortable2')
+    var sortable1 = Sortable.create(sort1, {
+        group: {
+            name: 'sort1',
+            pull: 'clone',
+            put: false,
+        },
+        sort: false,
+        onEnd: function(evt) {
+            $(evt.item).find('h5').text("Fuck me it works");
+
+        },
+    });
+    var sortable2 = Sortable.create(sort2, {
+        group: {
+            name: 'sort2',
+            pull: false,
+            put: 'sort1',
+        },
+        onEnd: function(evt) {
+                $(evt.item).find('h5').val("TESTTTT");
+
+        },
+    });
+
+
+
+
+
+
+
 
     var optionNumber = 0;
 
