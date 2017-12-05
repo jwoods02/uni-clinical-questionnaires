@@ -28,10 +28,8 @@ public class Question {
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToMany
-    @JoinTable(name="question_option",
-            joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
-            inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
+    @OneToMany(mappedBy="question", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,targetEntity=Option.class)
+    @JsonIgnore
     private List<Option> options;
 
 }

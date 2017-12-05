@@ -27,7 +27,7 @@ public class QuestionController {
 
     @RequestMapping(path = "/question", method = RequestMethod.POST)
     public void createQuestion(NewQuestionForm newQuestionForm){
-        questionService.newQuestion(newQuestionForm.getDescription());
+        questionService.newQuestion(newQuestionForm.getQuestionDescription());
     }
     @RequestMapping(path = "/question/allQuestions/get", method = RequestMethod.GET)
     public @ResponseBody
