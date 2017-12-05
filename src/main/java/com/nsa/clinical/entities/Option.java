@@ -1,5 +1,6 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,4 +32,8 @@ public class Option {
     @ManyToOne
     @JoinColumn(name="question_id",referencedColumnName="question_id")
     private Question question;
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "options")
+    private List<Question> questions;
 }

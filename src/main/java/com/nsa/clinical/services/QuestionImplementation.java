@@ -5,6 +5,8 @@ import com.nsa.clinical.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by James on 21/11/2017.
  */
@@ -23,5 +25,15 @@ public class QuestionImplementation implements QuestionService {
         Question newQuestion = new Question();
         newQuestion.setQuestionDescription(description);
         questionRepository.saveAndFlush(newQuestion);
+    }
+
+    @Override
+    public Question retrieveQuestion(Long QuestionId){
+        return questionRepository.findByQuestionId(QuestionId);
+    }
+
+    @Override
+    public List<Question> retrieveAllQuestions () {
+        return questionRepository.findAll();
     }
 }
