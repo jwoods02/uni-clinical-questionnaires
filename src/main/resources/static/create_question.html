@@ -191,37 +191,38 @@
 
 
 
-    // Set id's for template children before submit
-    var ancestor = document.getElementById('listWithHandle'),
-        descendents = ancestor.getElementsByClassName('orderedOptions');
-
-    submitForm = function(){
-    // Post question form first
-    $('#questionForm').submit(function() {
-        var questionFormData = {
-            'questionDescription': $('input[name=questionDescription]').val()
-        };
-        $.ajax({
-            type: "POST",
-            url: "/api/question",
-            data: questionFormData,
-            dataType: "json",
-
-            //When first form has posted successfully, post options form
-            success: function () {
-                $("#optionForm").submit();
-                var optionFormData = {
-                    'optionType': $('input[name=selectType]').val()
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "/api/option",
-                    data: optionFormData,
-                    dataType: "json"
-                })
-            }
-        });
-    });
+//    // Set id's for template children before submit
+//    var ancestor = document.getElementById('listWithHandle'),
+//        descendents = ancestor.getElementsByClassName('orderedOptions');
+//
+//    submitForm = function() {
+//        // Post question form first
+//        $('#questionForm').submit(function () {
+//            var questionFormData = {
+//                'questionDescription': $('input[name=questionDescription]').val()
+//            };
+//            $.ajax({
+//                type: "POST",
+//                url: "/api/question",
+//                data: questionFormData,
+//                dataType: "json",
+//
+//                //When first form has posted successfully, post options form
+//                success: function () {
+//                    $("#optionForm").submit();
+//                    var optionFormData = {
+//                        'optionType': $('input[name=selectType]').val()
+//                    };
+//                    $.ajax({
+//                        type: "POST",
+//                        url: "/api/option",
+//                        data: optionFormData,
+//                        dataType: "json"
+//                    })
+//                }
+//            });
+//        });
+//    }
 
 
 </script>
