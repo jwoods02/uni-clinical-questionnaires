@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewOptionForm {
-    private Integer optionType;
     private String optionDescription;
     private Integer optionOrder;
     private Question question;

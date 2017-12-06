@@ -60,6 +60,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`question` (
   `question_id` INT(11) NOT NULL AUTO_INCREMENT,
   `question_description` TEXT NOT NULL,
+  `question_type` INT(11) NOT NULL,
   `questionnaire_id` INT(11) NOT NULL,
   PRIMARY KEY (`question_id`),
   INDEX `fk_question_questionnaire1_idx` (`questionnaire_id` ASC),
@@ -79,7 +80,6 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`options` (
   `option_id` INT(11) NOT NULL AUTO_INCREMENT,
   `option_description` TEXT NULL DEFAULT NULL,
-  `option_type` INT(11) NOT NULL,
   `option_order` INT(11) NULL,
   `question_id` INT(11) NOT NULL,
   PRIMARY KEY (`option_id`),
