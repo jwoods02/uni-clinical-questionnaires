@@ -6,203 +6,232 @@
     <title>Create New Question</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
 
 </head>
-
 <style>
     .hide {
         display: none;
     }
+
+    body {
+        padding-bottom: 10px;
+    }
+    .input-group {
+        padding: 2px;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    span:hover {
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+
+    }
 </style>
 <body>
 
-    <div id="navbar-template"></div>
+<div id="navbar-template"></div>
 
-    <div class="jumbotron">
-        <div class="container">
-            <form class="form" method="post" action="/api/question">
-                <fieldset>
-                    <!-- Create Question Form -->
-                    <h1>Create New Question</h1>
-
-                    <!-- Question-->
-                    <div class="form-group">
-                        <label class="control-label" for="description">Question Description</label>
-                        <input id="description" name="description" type="text" placeholder="Question Description" class="form-control input-md">
-                        <span class="help-block">Write your question here</span>
-                    </div>
-
-                    <!-- Submit button -->
-                    <div class="form-group">
-                        <button id="submit" name="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
-                </fieldset>
-            </form>
-        </div>
-    </div>
+<div class="jumbotron">
     <div class="container">
-        <form class="form" method="post" action="/api/option">
+        <h1>Create New Question</h1>
+        <form class="form" id="questionForm" method="post" action="/api/question">
             <fieldset>
 
-                <!-- Add Option Form -->
-                <h1>Add Option</h1>
-
-                <!-- Option Description -->
+                <!-- Question-->
                 <div class="form-group">
-                    <label class="control-label" for="optionDescription">Option Description</label>
-                    <input id="optionDescription" name="optionDescription" type="text" placeholder="Option Description" class="form-control input-md">
-                    <span class="help-block">Write the option description here</span>
+                    <label class="control-label" for="questionDescription">Question Description</label>
+                    <input id="questionDescription" name="questionDescription" type="text" placeholder="Question Description" class="form-control input-md">
                 </div>
-
-                <!-- Button Drop Down -->
                 <div class="form-group">
-                    <!--<label class="control-label" for="addOption">-->
-                        Select an Option
-                    </label>
-                    <select class="select form-control" id="selectOption" name="addOption">
-
-                        <option value="Select an Option">
-                            Select an Option
+                    <label class="control-label" for="selectType">Answer Type</label>
+                    <select class="select form-control" id="selectType" name="selectType" onchange="onTypeChange()" required>
+                        <option value="">
+                            Select an Answer Type
                         </option>
-                        <option value="Radio Button">
-                            Radio Button
+                        <option value="1">
+                            Radio Buttons
                         </option>
-                        <option value="Single Line">
-                            Single Line
+                        <option value="2">
+                            Single Line Answer
                         </option>
-                        <option value="Multi-Line">
-                            Multi-Line
+                        <option value="3">
+                            Multi-Line Answer
+                        </option>
+                        <option value="4">
+                            Checkboxes
                         </option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
-                    <button name="submit" class="btn btn-primary">Submit</button>
-                </div>
+                <!-- Buttons inserted here when needed -->
+                <div class="form-group" id="addOptionsButtonHere"></div>
 
-                <!-- Button -->
-                <!--<div class="form-group">-->
-                    <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
-                <!--</div>-->
+                <!-- Options inserted here individually -->
+                <div class="form-group" id="listWithHandle"></div>
 
+                <!-- Submit button -->
+                <button id="submit" name="submit" class="btn btn-primary">Submit</button>
             </fieldset>
-        </form>
-        <div id="addNewOptionsHere"></div>
-        <form>
-            <button id="addOptionForm" name="addOptionForm" class="btn btn-outline-primary btn-block" type="button">Add New Option</button>
         </form>
     </div>
 </div>
 
-<div class="hide" id="new-option-template">
-    <form class="form" method="post" action="/api/option">
-        <br>
+<!-- ======================================== Option templates ======================================================-->
 
-        <fieldset>
-
-            <!-- Add Option Form -->
-            <h1>Add Option</h1>
-
-            <!-- Option Description-->
-            <div class="form-group">
-                <label class="control-label" for="optionDescription">Option Description</label>
-                <input id="optionDescription" name="description" type="text" placeholder="Option Description" class="form-control input-md">
-                <span class="help-block">Write the option description here</span>
-            </div>
-
-            <!-- Button Drop Down -->
-            <div class="form-group">
-                <!--<label class="control-label" for="addOption">-->
-                Select an Option
-                </label>
-                <select class="select form-control" id="selectOption" name="type">
-
-                    <option value="">
-                        Select an Option
-                    </option>
-                    <option value="1">
-                        Radio Button
-                    </option>
-                    <option value="2">
-                        Single Line
-                    </option>
-                    <option value="3">
-                        Multi-Line
-                    </option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <button name="deleteOption" class="btn btn-danger deleteOption" type="button">Delete</button>
-                <button name="submit" class="btn btn-primary">Submit</button>
-            </div>
-
-            <!-- Button -->
-            <!--<div class="form-group">-->
-            <!--<button id="addOption" name="addOption" class="btn btn-primary">Submit</button>-->
-            <!--</div>-->
-
-        </fieldset>
-    </form>
+<div class="hide" id="radio_buttons_template">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        <input name="description" class="form-control" type="text" placeholder="Option Description">
+        <span class="input-group-btn">
+            <button class="btn btn-danger removeOption" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
 </div>
 
-    <script src="../js/templates.js"></script>
+<div class="hide" id="single_line_template">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+        <input class="form-control" type="text" disabled>
+    </div>
+</div>
+
+<div class="hide" id="multi_line_template">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+        <textarea class="form-control" rows="3" disabled></textarea>
+    </div>
+</div>
+
+<div class="hide" id="check_boxes_template">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+        <input name="description" class="form-control" type="text" placeholder="Option Description">
+        <span class="input-group-btn">
+            <button class="btn btn-danger removeOption" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
+<!-- ======================================== Button templates ======================================================-->
+
+<div class="hide" id="add_radio_option_template">
+    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addRadioOption()">Add Option</button>
+</div>
+
+<div class="hide" id="add_checkbox_template">
+    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addCheckboxOption()">Add Option</button>
+</div>
+
+
+
+<script src="../js/templates.js"></script>
 
 
 
 <script>
 
-    var optionNumber = 0;
+    // Load templates depending on selected option type
+    var selectedValue;
+    function onTypeChange() {
+        selectedValue = document.getElementById('selectType').value;
+        if (selectedValue === "") {
+            $('#listWithHandle').empty();
+            $('#addOptionsButtonHere').empty();
+        } else if (selectedValue === "1") {
+            $('#listWithHandle').empty().append($("#radio_buttons_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_radio_option_template").html());
+        } else if (selectedValue === "2") {
+            $('#listWithHandle').empty().append($("#single_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (selectedValue === "3") {
+            $('#listWithHandle').empty().append($("#multi_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (selectedValue === "4") {
+            $('#listWithHandle').empty().append($("#check_boxes_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_checkbox_template").html());
+        }
+        return selectedValue;
+    }
 
-    $("#addOptionForm").click(function(){
-        $("#addNewOptionsHere").append($("#new-option-template").html());
-        optionNumber += 1;
+    // Adds a new radio button option
+    function addRadioOption() {
+        $("#listWithHandle").append($("#radio_buttons_template").html());
+    }
+
+    // Adds a new checkbox option
+    function addCheckboxOption() {
+        $("#listWithHandle").append($("#check_boxes_template").html());
+    }
+
+    // Removes an option
+    $(document.body).on('click', '.removeOption', function () {
+        $(this).closest('.input-group').remove();
     });
 
-    $(document.body).on('click', '.deleteOption' ,function(){
-        $(this).closest('.form').remove();
-        optionNumber -= 1;
+    // Makes listWithHandle div sortable so options can be reordered.
+    // Referenced from: https://github.com/RubaXa/Sortable/blob/master/README.md
+    Sortable.create(listWithHandle, {
+        handle: '.input-group-addon',
+        cursor: 'move',
+        animation: 125
     });
 
 
+//    // Gets option description and order from each template child.
+//    var allOptions = {};
+//    function getMultipleOptions() {
+//        if (document.getElementById('selectType').value === ("1" || "4")) {
+//            var ancestor = document.getElementById('listWithHandle'),
+//                descendants = ancestor.getElementsByName('description');
+//
+//            for (i = 0; i < descendants.length; i++) {
+//                var current = descendants[i];
+//                var description = current.value;
+//                var order = i + 1;
+//
+//                var option = {"description" : description};
+//                allOptions.push(option);
+//
+//            }
+//            return allOptions;
+//        } else {
+//            return allOptions;
+//        }
+//    }
 
-//    $('#submit').submit(function(event) {
-//
-//        var formData = {
-//            'description'              : $('input[name=description]').val()
-//        };
-//
-//        $.ajax({
-//            type        : 'POST',
-//            url         : '/api/questionnaire/create',
-//            data        : formData,
-//            dataType    : 'json',
-//            async       : 'false'
-//        })
-//        // using the done promise callback
-//            .done(function(data) {
-//                for (i = 0; i < optionNumber; i++) {
-//
-//                }
-//
-//                });
-//
-//            // using the fail promise callback
-//            .fail(function(data) {
-//
-//                // show any errors
-//                // best to remove for production
-//                console.log(data);
-//            });
-//
-//
-//    });
 
+    // Submits the new question with options
+    $('#questionForm').submit(function (event) {
+        event.preventDefault(); // Stops the form submitting twice
+        var questionFormData = {
+            'questionDescription': $('input[name=questionDescription]').val(),
+            'questionType': selectedValue
+//            'options': getMultipleOptions()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/api/question",
+            dataType: 'json',
+            data: questionFormData,
+            success: function (data) {
+                alert(data.status);
+            }
+        });
+    });
 
 </script>
 </body>

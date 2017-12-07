@@ -23,7 +23,7 @@ public class OptionController {
     }
 
     @RequestMapping(path = "/option", method = RequestMethod.POST)
-    public void createQuestion(NewOptionForm newOptionForm){
-        optionService.newOption(newOptionForm.getDescription(), newOptionForm.getType());
+    public void createOption(NewOptionForm newOptionForm){
+//        optionService.newOption(newOptionForm.getOptionDescription(), newOptionForm.getOptionType());
     }
 }

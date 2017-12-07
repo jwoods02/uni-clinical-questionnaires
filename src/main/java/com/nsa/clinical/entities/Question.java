@@ -1,8 +1,12 @@
 package com.nsa.clinical.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,14 +26,28 @@ public class Question {
     @Column(name = "question_description")
     private String questionDescription;
 
+    @Column(name = "question_type")
+    private Integer questionType;
+
     @ManyToOne
     @JoinColumn(name="questionnaire_id",referencedColumnName="questionnaire_id")
     private Questionnaire questionnaire;
 
-    @ManyToMany
-    @JoinTable(name="question_option",
-            joinColumns = @JoinColumn(name="question_id", referencedColumnName="question_id"),
-            inverseJoinColumns = @JoinColumn(name="option_id", referencedColumnName="option_id"))
+    @OneToMany(mappedBy="question", cascade = CascadeType.ALL, fetch = FetchType.LAZY,targetEntity=Option.class)
+    @JsonIgnore
     private List<Option> options;
 
+    public Question(String questionDescription, Integer questionType, List<Option> options) {
+        this.questionDescription = questionDescription;
+        this.questionType = questionType;
+        this.options = options;
+    }
+
+    public Question(String questionDescription, Integer questionType) {
+        this.questionDescription = questionDescription;
+        this.questionType = questionType;
+    }
+
+    public Question() {
+    }
 }

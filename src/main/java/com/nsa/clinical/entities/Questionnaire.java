@@ -34,7 +34,7 @@ public class Questionnaire {
     @JoinColumn(name="admin_id",referencedColumnName="admin_id")
     private Admin admin;
 
-    @OneToMany(mappedBy="questionnaire", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY,targetEntity=Question.class)
+    @OneToMany(mappedBy="questionnaire", cascade = CascadeType.ALL, fetch = FetchType.LAZY,targetEntity=Question.class)
     @JsonIgnore
     private List<Question> questions;
 
