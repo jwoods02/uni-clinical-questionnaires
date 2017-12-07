@@ -24,6 +24,6 @@ public class OptionController {
 
     @RequestMapping(path = "/option", method = RequestMethod.POST)
     public void createOption(NewOptionForm newOptionForm){
-        optionService.newOption(newOptionForm.getOptionDescription(), newOptionForm.getOptionType());
+//        optionService.newOption(newOptionForm.getOptionDescription(), newOptionForm.getOptionType());
     }
 }

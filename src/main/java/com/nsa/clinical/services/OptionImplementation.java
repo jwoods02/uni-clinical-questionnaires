@@ -20,10 +20,10 @@ public class OptionImplementation implements  OptionService {
 
     @Override
     public void newOption(String description, Integer type) {
-        Option newOption = new Option();
-        newOption.setOptionDescription(description);
+//        Option newOption = new Option();
+//        newOption.setOptionDescription(description);
 //        newOption.setOptionType(type.toString());
-        optionRepository.saveAndFlush(newOption);
+//        optionRepository.saveAndFlush(newOption);
     }
 
 

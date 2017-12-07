@@ -1,8 +1,6 @@
 package com.nsa.clinical.services;
 
-import com.nsa.clinical.entities.Question;
-
-import java.util.List;
+import com.nsa.clinical.forms.NewQuestionForm;
 
 /**
  * Created by James on 21/11/2017.
