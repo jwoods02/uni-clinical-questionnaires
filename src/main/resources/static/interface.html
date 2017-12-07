@@ -14,6 +14,8 @@
 
 </head>
 
+<body>
+
 <style>
     .hide {
         display: none;
@@ -42,7 +44,6 @@
     }
 
 </style>
-<body>
 
 <div id="navbar-template"></div>
 
@@ -94,7 +95,7 @@
         <div class="col-md-9">
             <ul id="sortable2" class="list-group sortable2 connected-sortable">
 
-                
+
             </ul>
 
         </div>
@@ -181,15 +182,15 @@
 
             } else if ( $( evt.item ).hasClass( "radio-button" ) ) {
 
-                $(evt.item).children(':first').html(newOption(1));
+                $(evt.item).replaceWith( template.clone() );
 
             } else if ( $( evt.item ).hasClass( "single-line" ) ) {
 
-                $(evt.item).children(':first').html(newOption(2));
+                $(evt.item).replaceWith( template.clone() );
 
             } else if ( $( evt.item ).hasClass( "multi-line" ) ) {
 
-                $(evt.item).children(':first').html(newOption(3));
+                $(evt.item).replaceWith( template.clone() );
 
             }
 
@@ -200,7 +201,8 @@
             name: 'sort2',
             pull: false,
             put: 'sort1',
-        }
+        },
+        animation: 125,
     });
 
     function newOption(type) {
