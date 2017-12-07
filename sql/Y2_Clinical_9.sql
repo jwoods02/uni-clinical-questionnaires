@@ -79,8 +79,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`options` (
   `option_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `option_description` TEXT NULL DEFAULT NULL,
-  `option_order` INT(11) NULL,
+  `option_description` TEXT NOT NULL,
+  `option_order` INT(11) NOT NULL,
   `question_id` INT(11) NOT NULL,
   PRIMARY KEY (`option_id`),
   INDEX `fk_options_question1_idx` (`question_id` ASC),
