@@ -191,27 +191,27 @@
     });
 
 
-    // Gets option description and order from each template child.
-    var allOptions = {};
-    function getMultipleOptions() {
-        if (document.getElementById('selectType').value === ("1" || "4")) {
-            var ancestor = document.getElementById('listWithHandle'),
-                descendants = ancestor.getElementsByName('description');
-
-            for (i = 0; i < descendants.length; i++) {
-                var current = descendants[i];
-                var description = current.value;
-                var order = i + 1;
-
-                var option = {"description" : description};
-                allOptions.push(option);
-
-            }
-            return allOptions;
-        } else {
-            return allOptions;
-        }
-    }
+//    // Gets option description and order from each template child.
+//    var allOptions = {};
+//    function getMultipleOptions() {
+//        if (document.getElementById('selectType').value === ("1" || "4")) {
+//            var ancestor = document.getElementById('listWithHandle'),
+//                descendants = ancestor.getElementsByName('description');
+//
+//            for (i = 0; i < descendants.length; i++) {
+//                var current = descendants[i];
+//                var description = current.value;
+//                var order = i + 1;
+//
+//                var option = {"description" : description};
+//                allOptions.push(option);
+//
+//            }
+//            return allOptions;
+//        } else {
+//            return allOptions;
+//        }
+//    }
 
 
     // Submits the new question with options

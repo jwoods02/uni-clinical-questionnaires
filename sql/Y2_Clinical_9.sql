@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`question` (
   `question_id` INT(11) NOT NULL AUTO_INCREMENT,
   `question_description` TEXT NOT NULL,
   `question_type` INT(11) NOT NULL,
-  `questionnaire_id` INT(11) NOT NULL,
+  `questionnaire_id` INT(11) NULL,
   PRIMARY KEY (`question_id`),
   INDEX `fk_question_questionnaire1_idx` (`questionnaire_id` ASC),
   CONSTRAINT `fk_question_questionnaire1`
