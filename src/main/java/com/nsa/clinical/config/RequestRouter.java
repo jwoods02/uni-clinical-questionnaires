@@ -12,8 +12,8 @@ public class RequestRouter extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/interface.html");
-        registry.addViewController("/api/index/**").setViewName("forward:/interface.html");
+        registry.addViewController("/").setViewName("forward:/index.html");
+        registry.addViewController("/api/index/**").setViewName("forward:/index.html");
         registry.addViewController("/api/interface/**").setViewName("forward:/interface.html");
         registry.addViewController("/api/create_question/**").setViewName("forward:/create_question.html");
         registry.addViewController("/api/create_questionnaire/**").setViewName("forward:/create_questionnaire.html");

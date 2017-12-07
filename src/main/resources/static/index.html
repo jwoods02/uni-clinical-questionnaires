@@ -1,22 +1,117 @@
 <!DOCTYPE html>
-<html lang = "en" >
-    <head >
-        <meta charset = "UTF-8" >
-        <title >Y2_Clinical_9<</title >
-        <script
-                src = "https://code.jquery.com/jquery-3.2.1.min.js"
-                integrity = "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-                crossorigin = "anonymous" >
-        </script >
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap-reboot.css" />
-        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap-grid.css" />
-        <link rel = "stylesheet" type = "text/css" href = "css/bootstrap.css" />
-        <script src = "/js/bootstrap.js" ></script >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>South East Wales Trials Unit</title>
+</head>
+<body>
 
-    </head >
-    <body >
-    <p>Hello World</p>
+<style>
+    .questionnaire-text {
+        margin: 0;
+    }
 
-    </body >
-</html >
+    .project-card {
+        margin-bottom: 2rem;
+    }
+
+    .hide {
+        display: none;
+    }
+    
+    .project-title {
+        display: inline;
+    }
+</style>
+
+<div id="navbar-template"></div>
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>South East Wales Trials Unit</h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="card project-card">
+        <div class="card-header">
+            <h4 class="project-title">Project 1</h4>
+            <a href="/api/interface/" class="btn btn-primary float-right">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add New
+            </a>
+        </div>
+            <ul class="list-group" id="questions-here">
+
+
+            </ul>
+    </div>
+
+</div>
+
+<li class="list-group-item flex-column align-items-start hide questionnaire-template">
+    <div class="d-flex w-100 justify-content-between">
+        <h5 class="questionnaire-text align-self-center">Questionnaire 1</h5>
+        <div class="btn-group input-group-btn">
+            <a href="#" class="btn btn-light">
+                <i class="fa fa-eye" aria-hidden="true"></i> Preview
+            </a>
+            <a href="/api/interface" class="btn btn-primary">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+            </a>
+            <button class="btn btn-danger delete-option" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i> Delete
+            </button>
+        </div>
+    </div>
+</li>
+
+<script src="../js/templates.js"></script>
+
+<script>
+
+
+    // Ensures that the drop down is populated with questionnaires as soon as the page loads.
+    $(document).ready(function() {
+        var template = $(".questionnaire-template").clone();
+
+        $(template).removeClass('hide');
+
+        $.ajax({
+            url: "/api/questionnaire/allQuestionnaires/get",
+            type: "GET",
+            dataType: "json"
+        }).done(function (data) {
+            // Iterates each questionnaire object and appends a new option to the drop down with value set as id
+            data.forEach(function (questionnaire) {
+                var this_template = template;
+
+                $(this_template).attr('id', questionnaire.questionnaireId);
+
+                $(this_template).find('.questionnaire-text').html(questionnaire.questionnaireTitle);
+
+                $("#questions-here").append($(this_template).clone());
+
+
+
+//                $("#select_questionnaire").append($("<option/>", {
+//                    value: questionnaire.questionnaireId,
+//                    text: questionnaire.questionnaireTitle
+//                }));
+            });
+        })
+    });
+
+</script>
+
+</body>
+</html>
+
