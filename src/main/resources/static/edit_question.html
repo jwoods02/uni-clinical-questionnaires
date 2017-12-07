@@ -9,6 +9,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Question Editor</title>
+<style>
+    .hidden-form {
+        display: none;
+    }
+    .hidden-form.show {
+        display: block;
+    }
+</style>
 </head>
 <body>
 
@@ -18,7 +26,7 @@
     <h1>Question Editor</h1>
     <p>Please select an existing question from the drop down menu to edit or delete it.</p>
     <!--<form action="/api/question/delete" method="POST" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">-->
-    <form>
+    <form id="select">
         <div class="form-row">
             <div class="col-md-6">
                 <label class="sr-only" for="select_question">Select</label>
@@ -27,12 +35,22 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </form>
+    <form class="hidden-form" id="edit_question">
+        <input type="text" id="question" name="question"/>
+        <button type="submit">Save</button>
+    </form>
+
+
 </div>
+
+<script>
+
+</script>
 
 <script src="../js/templates.js"></script>
 
@@ -54,7 +72,32 @@
                 $("#select_question").append(option);
             });
         });
+        var questionID = 0;
+        $("#select").submit(function (e) {
+            var selectedQuestion = $("#select_question").find(":selected");
+            questionID = selectedQuestion.val();
+            $("#question").val(selectedQuestion.text());
+            $(".hidden-form").toggleClass("show");
+            e.preventDefault();
+        });
+        $("#edit_question").submit(function (e) {
+            var formJson = {
+                'questionID':questionID,
+                'questionName':$("input[Name=question]").val()
+            };
+            $.ajax({
+                url: "/api/question/updateQuestion",
+                type: "GET",
+                data: formJson,
+                dataType: "json",
+                success: function (data) {
+                    // Refresh the page
+                }
+            });
+            e.preventDefault();
+        });
     });
+
 
 </script>
 <div class = "template" style="display:none;">
