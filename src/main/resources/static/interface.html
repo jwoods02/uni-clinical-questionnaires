@@ -58,13 +58,13 @@
 <div class="container">
     <div class="row">
         <ul id="sortable" class="col-md-3 text-center connected-sortable">
-            <li class="card ui-state-default">
-                <div class="card-block multiple-choice">
+            <li class="card ui-state-default multiple-choice">
+                <div class="card-block">
                     <h5 class="card-title">Multiple Choice</h5>
                 </div>
             </li>
-            <li class="card ui-state-default">
-                <div class="card-block radio-button">
+            <li class="card ui-state-default radio-button">
+                <div class="card-block">
                     <h5 class="card-title">Radio Button</h5>
                 </div>
             </li>
@@ -73,17 +73,15 @@
                     <h5 class="card-title">Single Line Answer</h5>
                 </div>
             </li>
-            <li class="card ui-state-default">
-                <div class="card-block multi-line">
+            <li class="card ui-state-default multi-line">
+                <div class="card-block">
                     <h5 class="card-title">Multiple Line Answer</h5>
                 </div>
             </li>
         </ul>
         <div class="col-md-9">
             <ul id="sortable2" class="card canvas-card sortable2 connected-sortable">
-                <div class="card-block">
 
-                </div>
             </ul>
 
         </div>
@@ -94,27 +92,8 @@
 <script src="../js/templates.js"></script>
 
 
+<!--Drag and Drop Interface-->
 <script>
-
-//    $( function() {
-//        $( ".question-list, .question-canvas" ).sortable({
-//            connectWith: ".connected-sortable",
-//            helper: "clone",
-//            start: function (event, ui) {
-//                $(ui.item).show();
-//                clone = $(ui.item).clone();
-//                before = $(ui.item).prev();
-//                parent = $(ui.item).parent();
-//
-//            },
-//            receive: function (event, ui) { //only when dropped from one to another!
-//                if (before.length) before.after(clone);
-//                else parent.prepend(clone);
-//            }
-//        }).disableSelection();
-//
-//
-//    } );
 
     var sort1 = document.getElementById('sortable');
     var sort2 = document.getElementById('sortable2')
@@ -128,6 +107,24 @@
         onEnd: function(evt) {
             $(evt.item).find('h5').text("Fuck me it works");
 
+            if ( $( evt.item ).hasClass( "multiple-choice" ) ) {
+
+                $(evt.item).children(':first').html(newOption(0));
+
+            } else if ( $( evt.item ).hasClass( "radio-button" ) ) {
+
+                $(evt.item).children(':first').html(newOption(1));
+
+            } else if ( $( evt.item ).hasClass( "single-line" ) ) {
+
+                $(evt.item).children(':first').html(newOption(2));
+
+            } else if ( $( evt.item ).hasClass( "multi-line" ) ) {
+
+                $(evt.item).children(':first').html(newOption(3));
+
+            }
+
         },
     });
     var sortable2 = Sortable.create(sort2, {
@@ -135,32 +132,39 @@
             name: 'sort2',
             pull: false,
             put: 'sort1',
-        },
-        onEnd: function(evt) {
-                $(evt.item).find('h5').val("TESTTTT");
-
-        },
+        }
     });
 
+    function newOption(type) {
+        switch(type) {
+            case 0:
+                return '<h5 class="card-title"> New multiple choice question </h5>' +
+                    '<a href="#" class="btn btn-primary">Edit</a> ' +
+                    '<a href="#" class="btn btn-danger">Delete</a>'
+                break;
 
+            case 1:
+                return '<h5 class="card-title"> New radio button question </h5>' +
+                  '<a href="#" class="btn btn-primary">Edit</a> ' +
+                  '<a href="#" class="btn btn-danger">Delete</a>'
+                break;
 
+            case 2:
+                return '<h5 class="card-title"> New single line question </h5>' +
+                 '<a href="#" class="btn btn-primary">Edit</a> ' +
+                 '<a href="#" class="btn btn-danger">Delete</a>'
+                break;
 
+            case 3:
+                return '<h5 class="card-title"> New multi line question </h5>' +
+                    '<a href="#" class="btn btn-primary">Edit</a> ' +
+                    '<a href="#" class="btn btn-danger">Delete</a>'
+                break;
 
-
-
-
-    var optionNumber = 0;
-
-    $("#addOptionForm").click(function(){
-        $("#addNewOptionsHere").append($("#new-option-template").html());
-        optionNumber += 1;
-    });
-
-    $(document.body).on('click', '.deleteOption' ,function(){
-        $(this).closest('.form').remove();
-        optionNumber -= 1;
-    });
-
+            default:
+                return '<h5 class="card-title"> New unknown question </h5>'
+        }
+    }
 
 
 </script>
