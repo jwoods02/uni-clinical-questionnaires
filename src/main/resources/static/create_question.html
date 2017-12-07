@@ -91,7 +91,7 @@
 <div class="hide" id="radio_buttons_template">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-        <input name="description" class="form-control" type="text" placeholder="Option Description">
+        <input class="form-control description" type="text" placeholder="Option Description">
         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -117,7 +117,7 @@
 <div class="hide" id="check_boxes_template">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-        <input name="description" class="form-control" type="text" placeholder="Option Description">
+        <input class="form-control description" type="text" placeholder="Option Description">
         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -191,36 +191,32 @@
     });
 
 
-//    // Gets option description and order from each template child.
-//    var allOptions = {};
-//    function getMultipleOptions() {
-//        if (document.getElementById('selectType').value === ("1" || "4")) {
-//            var ancestor = document.getElementById('listWithHandle'),
-//                descendants = ancestor.getElementsByName('description');
-//
-//            for (i = 0; i < descendants.length; i++) {
-//                var current = descendants[i];
-//                var description = current.value;
-//                var order = i + 1;
-//
-//                var option = {"description" : description};
-//                allOptions.push(option);
-//
-//            }
-//            return allOptions;
-//        } else {
-//            return allOptions;
-//        }
-//    }
+    // Gets option description and order from each template child.
+    var allOptions = [];
+    function getMultipleOptions() {
+        if (document.getElementById('selectType').value === ("1" || "4")) {
+            var ancestor = document.getElementById('listWithHandle'),
+                descendants = ancestor.getElementsByClassName('description');
+
+            for (i = 0; i < descendants.length; i++) {
+                var current = descendants[i];
+                allOptions.push(current.value);
+                allOptions.push(i + 1);
+            }
+            return allOptions;
+        }
+        return allOptions;
+    }
 
 
     // Submits the new question with options
     $('#questionForm').submit(function (event) {
         event.preventDefault(); // Stops the form submitting twice
+//        alert(JSON.stringify(getMultipleOptions()));
         var questionFormData = {
             'questionDescription': $('input[name=questionDescription]').val(),
-            'questionType': selectedValue
-//            'options': getMultipleOptions()
+            'questionType': selectedValue,
+            'options': JSON.stringify(getMultipleOptions())
         };
         $.ajax({
             type: "POST",
