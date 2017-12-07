@@ -51,6 +51,16 @@ public class QuestionImplementation implements QuestionService {
     }
 
     @Override
+    public Question retrieveQuestion(Long questionID) {
+        return questionRepository.findByQuestionId(questionID);
+    }
+
+    @Override
+    public List<Question> retrieveAllQuestions() {
+        return questionRepository.findAll();
+    }
+
+    @Override
     public void updateQuestion(Long questionID, String questionName){
         Question question = questionRepository.findByQuestionId(questionID);
         question.setQuestionDescription(questionName);
