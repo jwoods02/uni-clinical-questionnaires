@@ -11,4 +11,5 @@ public interface QuestionService {
     void newQuestion(String description);
     Question retrieveQuestion(Long QuestionId);
     List<Question> retrieveAllQuestions();
+    void updateQuestion(Long questionID, String questionName);
 }

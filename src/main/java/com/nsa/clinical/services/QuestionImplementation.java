@@ -2,6 +2,7 @@ package com.nsa.clinical.services;
 
 import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.repositories.QuestionRepository;
+import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,12 @@ public class QuestionImplementation implements QuestionService {
     @Override
     public List<Question> retrieveAllQuestions () {
         return questionRepository.findAll();
+    }
+
+    @Override
+    public void updateQuestion(Long questionID, String questionName){
+        Question question = questionRepository.findByQuestionId(questionID);
+        question.setQuestionDescription(questionName);
+        questionRepository.saveAndFlush(question);
     }
 }
