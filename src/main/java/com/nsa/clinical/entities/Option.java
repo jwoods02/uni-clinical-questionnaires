@@ -26,7 +26,8 @@ public class Option {
 
     @Column(name = "option_order")
     private Integer optionOrder;
-
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="question_id",referencedColumnName="question_id")
     private Question question;

@@ -4,6 +4,7 @@ import com.nsa.clinical.entities.Option;
 import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.forms.NewQuestionForm;
 import com.nsa.clinical.repositories.QuestionRepository;
+import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,12 @@ public class QuestionImplementation implements QuestionService {
         } else if ((type == 2 )|| (type == 3)) {
             questionRepository.saveAndFlush(newQuestion);
         }
+    }
+
+    @Override
+    public void updateQuestion(Long questionID, String questionName){
+        Question question = questionRepository.findByQuestionId(questionID);
+        question.setQuestionDescription(questionName);
+        questionRepository.saveAndFlush(question);
     }
 }

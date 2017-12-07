@@ -1,6 +1,7 @@
 package com.nsa.clinical.controllers;
 
 import com.nsa.clinical.forms.NewQuestionForm;
+import com.nsa.clinical.forms.UpdateQuestionForm;
 import com.nsa.clinical.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,16 @@ public class QuestionController {
         questionService.newQuestion(newQuestionForm);
         return new ResponseEntity(HttpStatus.OK);
     }
+    @RequestMapping(path = "/question/allQuestions/get", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Question> getAllStoredQuestions(){
+        return questionService.retrieveAllQuestions();
+    }
+    @RequestMapping(path = "/question/updateQuestion", method = RequestMethod.POST)
+    public void updateQuestion(UpdateQuestionForm updateQuestionForm){
+        questionService.updateQuestion(updateQuestionForm.getQuestionID(),updateQuestionForm.getQuestionName());
+    }
+
 
     // @RequestMapping(path = "/question", method = RequestMethod.GET)
     // Example of different RequestMethod's for different API calls, using HTTP words
