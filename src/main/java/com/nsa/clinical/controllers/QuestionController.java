@@ -2,6 +2,7 @@ package com.nsa.clinical.controllers;
 
 import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.forms.NewQuestionForm;
+import com.nsa.clinical.forms.UpdateQuestionForm;
 import com.nsa.clinical.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,10 @@ public class QuestionController {
     public @ResponseBody
     List<Question> getAllStoredQuestions(){
         return questionService.retrieveAllQuestions();
+    }
+    @RequestMapping(path = "/question/updateQuestion", method = RequestMethod.POST)
+    public void updateQuestion(UpdateQuestionForm updateQuestionForm){
+        questionService.updateQuestion(updateQuestionForm.getQuestionID(),updateQuestionForm.getQuestionName());
     }
 
 
