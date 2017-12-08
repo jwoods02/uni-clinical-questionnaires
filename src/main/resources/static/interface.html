@@ -244,10 +244,15 @@
     }
 
 
-    // Removes an option
     $(document.body).on('click', '.question-edit-button', function () {
         window.questionListItem = $(this).closest('li');
         $('#exampleModal').modal();
+
+        if ($(window.questionListItem.attr('id')) === null){
+
+        } else if (){
+            
+        }
 
     });
 
