@@ -7,12 +7,7 @@ import com.nsa.clinical.forms.NewQuestionnaireForm;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +37,11 @@ public class QuestionnaireController {
     @ResponseBody
     Questionnaire getQuestionnaire(GetQuestionnaireForm getQuestionnaireForm, HttpServletRequest request, HttpServletResponse response) {
         return questionnaireService.retrieveQuestionnaire(getQuestionnaireForm.getId());
+    }
+
+    @RequestMapping(path = "/questionnaire/questions/{id}", method = RequestMethod.GET)
+    public List<Question> getAllQuestionsInQuestionnaire(@PathVariable Integer id) {
+        return questionnaireService.retrieveAllQuestionsInQuestionnaire(id.longValue());
     }
 
     @RequestMapping(path = "/questionnaire/allQuestionnaires/get", method = RequestMethod.GET)

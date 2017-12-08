@@ -71,21 +71,21 @@
 
 <div class="jumbotron">
     <div class="container">
-        <form class="form" method="post" action="/api/question">
+        <form class="form" method="post" action="" id="questionnaire-submit-form">
             <fieldset>
                 <!-- Create Question Form -->
                 <h1>Create / Edit Questionnaire</h1>
 
                 <!-- Question-->
                 <div class="form-group">
-                    <label class="control-label" for="description">Questionnaire Title</label>
-                    <input id="description" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
+                    <label class="control-label" for="questionnaire-description">Questionnaire Title</label>
+                    <input id="questionnaire-description" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
                     <span class="help-block">Write the questionnaire title here</span>
                 </div>
 
                 <!-- Submit button -->
                 <div class="form-group">
-                    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button id="submit_questionnaire" name="submit" class="btn btn-primary">Submit</button>
                 </div>
 
             </fieldset>
@@ -116,6 +116,7 @@
         </ul>
         <div class="col-md-9">
             <ul id="sortable2" class="list-group sortable2 connected-sortable">
+                <div id="questions-here"></div>
 
 
             </ul>
@@ -248,11 +249,11 @@
         window.questionListItem = $(this).closest('li');
         $('#exampleModal').modal();
 
-        if ($(window.questionListItem.attr('id')) === null){
-
-        } else if (){
-            
-        }
+//        if ($(window.questionListItem.attr('id')) === null){
+//
+//        } else if (){
+//
+//        }
 
     });
 
@@ -275,6 +276,70 @@
 
 
     }
+
+</script>
+
+
+
+<!--SCRIPT FOR LOADING CURRENT QUESTIONNAIRE-->
+<script>
+    var template = $(".question-list-item-template").clone();
+
+    $(template).removeClass('hide');
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.has('q')) {
+        var questionnaireId = urlParams.get('q');
+
+        $('#questionnaire-submit-form').attr('data-questionnaire-id', questionnaireId);
+
+        $.ajax({
+            type: "GET",
+            url: "/api/questionnaire/questions/"+questionnaireId,
+            dataType: "json",
+            success: function (data) {
+
+                $.each(data,function (index, question) {
+
+                    var thisTemplate = template.clone();
+
+                    $(thisTemplate).find('.question-list-text').html(question.questionDescription);
+                    $(thisTemplate).attr('id', question.questionId);
+
+                    $('#questions-here').append(thisTemplate);
+
+                });
+
+
+            }
+        });
+
+
+    }
+</script>
+
+<!--SCRIPT FOR SAVING QUESTIONNAIRES-->
+<script>
+
+    $('#submit_questionnaire').click(function () {
+
+        var questionnaireName = $('#questionnaireName').val();
+
+        var questionIdList = {};
+
+        $('#sortable2').children('li').each(function () {
+            var questionId = $(this).attr('id');
+            questionIdList += questionIdList;
+        });
+
+        if($('#questionnaire-submit-form').attr("data-questionnaire-id")) {
+            var questionnaireId = $('#questionnaire-submit-form').attr("data-questionnaire-id");
+        }
+
+    });
+
+
 
 </script>
 

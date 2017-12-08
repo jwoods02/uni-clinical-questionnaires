@@ -1,5 +1,6 @@
 package com.nsa.clinical.services;
 
+import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,10 @@ public class QuestionnaireImplementation implements QuestionnaireService {
         questionnaireRepository.delete(id);
     }
 
+    @Override
+    public List<Question> retrieveAllQuestionsInQuestionnaire(Long id) {
+        Questionnaire questionnaire = questionnaireRepository.findByQuestionnaireId(id);
+
+        return questionnaire.getQuestions();
+    }
 }

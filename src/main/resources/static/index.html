@@ -64,7 +64,7 @@
             <a href="#" class="btn btn-light">
                 <i class="fa fa-eye" aria-hidden="true"></i> Preview
             </a>
-            <a href="/api/interface" class="btn btn-primary">
+            <a href="/api/interface" class="btn btn-primary edit-btn">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
             </a>
             <button class="btn btn-danger delete-option" type="button">
@@ -95,6 +95,8 @@
                 var this_template = template;
 
                 $(this_template).attr('id', questionnaire.questionnaireId);
+
+                $(this_template).find('.edit-btn').attr('href', '/api/interface?q=' + questionnaire.questionnaireId);
 
                 $(this_template).find('.questionnaire-text').html(questionnaire.questionnaireTitle);
 
