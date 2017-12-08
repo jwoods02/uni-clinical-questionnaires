@@ -10,7 +10,9 @@ import java.util.List;
  */
 public interface QuestionnaireService {
 
-    void newQuestionnaire(String description);
+    void newQuestionnaire(String title, List<Question> questionList);
+
+    void updateQuestionnaire(Long id, String title, List<Question> questionList);
 
     Questionnaire retrieveQuestionnaire(Long QuestionnaireId);
 

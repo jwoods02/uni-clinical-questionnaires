@@ -4,6 +4,8 @@ import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 import com.nsa.clinical.forms.GetQuestionnaireForm;
 import com.nsa.clinical.forms.NewQuestionnaireForm;
+import com.nsa.clinical.forms.UpdateQuestionnaireForm;
+import com.nsa.clinical.services.QuestionService;
 import com.nsa.clinical.services.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -21,15 +23,24 @@ import java.util.List;
 public class QuestionnaireController {
     @Autowired
     private QuestionnaireService questionnaireService;
+    private QuestionService questionService;
 
     @Autowired
-    public QuestionnaireController(QuestionnaireService questionnaireService) {
+    public QuestionnaireController(QuestionnaireService questionnaireService, QuestionService questionService) {
         this.questionnaireService = questionnaireService;
+        this.questionService = questionService;
     }
 
-    @RequestMapping(path = "/questionnaire/create", method = RequestMethod.POST)
+    @RequestMapping(path = "/questionnaire", method = RequestMethod.POST)
     public void createQuestionnaire(NewQuestionnaireForm newQuestionnaireForm) {
-        questionnaireService.newQuestionnaire(newQuestionnaireForm.getDescription());
+        List<Question> questionList = questionService.getQuestionsFromIds(newQuestionnaireForm.getQuestionIdList());
+        questionnaireService.newQuestionnaire(newQuestionnaireForm.getQuestionnaireTitle(), questionList);
+    }
+
+    @RequestMapping(path = "/questionnaire", method = RequestMethod.PUT)
+    public void updateQuestionnaire(UpdateQuestionnaireForm updateQuestionnaireForm) {
+        List<Question> questionList = questionService.getQuestionsFromIds(updateQuestionnaireForm.getQuestionIdList());
+        questionnaireService.updateQuestionnaire(updateQuestionnaireForm.getQuestionnaireId(), updateQuestionnaireForm.getQuestionnaireTitle(), questionList);
     }
 
     @RequestMapping(path = "/questionnaire/get", method = RequestMethod.GET)
@@ -59,4 +70,5 @@ public class QuestionnaireController {
             throw new ResourceNotFoundException();
         }
     }
+
 }

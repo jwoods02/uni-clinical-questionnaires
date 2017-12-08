@@ -37,4 +37,8 @@ public class Option {
     public Option() {
 
     }
+
+    public String toString() {
+        return "";
+    }
 }

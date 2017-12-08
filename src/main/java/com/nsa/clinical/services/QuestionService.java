@@ -2,6 +2,7 @@ package com.nsa.clinical.services;
 
 import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.forms.NewQuestionForm;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface QuestionService {
     List<Question> retrieveAllQuestions();
     void updateQuestion(Long questionID, String questionName);
     String getQuestionName(Long id);
+    List<Question> getQuestionsFromIds(JSONArray questionIdList);
 }

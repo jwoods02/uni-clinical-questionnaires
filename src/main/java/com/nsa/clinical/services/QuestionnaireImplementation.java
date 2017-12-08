@@ -2,6 +2,7 @@ package com.nsa.clinical.services;
 
 import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
+import com.nsa.clinical.repositories.QuestionRepository;
 import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,27 @@ public class QuestionnaireImplementation implements QuestionnaireService {
     private QuestionnaireRepository questionnaireRepository;
 
     @Autowired
-    public QuestionnaireImplementation(QuestionnaireRepository questionnaireRepository) {
+    public QuestionnaireImplementation(QuestionnaireRepository questionnaireRepository, QuestionRepository questionRepository) {
         this.questionnaireRepository = questionnaireRepository;
     }
 
     @Override
-    public void newQuestionnaire(String description){
+    public void newQuestionnaire(String title, List<Question> questionList){
         Questionnaire newQuestionnaire = new Questionnaire();
-        newQuestionnaire.setQuestionnaireDescription(description);
+        newQuestionnaire.setQuestionnaireTitle(title);
+        newQuestionnaire.setQuestions(questionList);
         questionnaireRepository.saveAndFlush(newQuestionnaire);
+//        TODO:
+//        Figure out why this doesn't link the questions to the questionnaire. FFS.'
+    }
+
+    @Override
+    public void updateQuestionnaire(Long id, String title, List<Question> questionList) {
+        Questionnaire updateQuestionnaire = questionnaireRepository.findByQuestionnaireId(id);
+        updateQuestionnaire.setQuestionnaireTitle(title);
+        updateQuestionnaire.setQuestions(questionList);
+        questionnaireRepository.saveAndFlush(updateQuestionnaire);
+
     }
 
     @Override

@@ -71,21 +71,21 @@
 
 <div class="jumbotron">
     <div class="container">
-        <form class="form" method="post" action="" id="questionnaire-submit-form">
+        <form class="form" method="" action="" id="questionnaire-submit-form">
             <fieldset>
                 <!-- Create Question Form -->
                 <h1>Create / Edit Questionnaire</h1>
 
                 <!-- Question-->
                 <div class="form-group">
-                    <label class="control-label" for="questionnaire-description">Questionnaire Title</label>
-                    <input id="questionnaire-description" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
+                    <label class="control-label" for="questionnaire-title">Questionnaire Title</label>
+                    <input id="questionnaire-title" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
                     <span class="help-block">Write the questionnaire title here</span>
                 </div>
 
                 <!-- Submit button -->
                 <div class="form-group">
-                    <button id="submit_questionnaire" name="submit" class="btn btn-primary">Submit</button>
+                    <button id="submit_questionnaire" name="submit" class="btn btn-primary" type="button">Submit</button>
                 </div>
 
             </fieldset>
@@ -116,8 +116,6 @@
         </ul>
         <div class="col-md-9">
             <ul id="sortable2" class="list-group sortable2 connected-sortable">
-                <div id="questions-here"></div>
-
 
             </ul>
 
@@ -296,6 +294,15 @@
 
         $.ajax({
             type: "GET",
+            url: "/api/questionnaire/get?id="+questionnaireId,
+            dataType: "json",
+            success: function (data) {
+                $('#questionnaire-title').val(data.questionnaireTitle);
+            }
+        });
+
+        $.ajax({
+            type: "GET",
             url: "/api/questionnaire/questions/"+questionnaireId,
             dataType: "json",
             success: function (data) {
@@ -307,7 +314,7 @@
                     $(thisTemplate).find('.question-list-text').html(question.questionDescription);
                     $(thisTemplate).attr('id', question.questionId);
 
-                    $('#questions-here').append(thisTemplate);
+                    $('#sortable2').append(thisTemplate);
 
                 });
 
@@ -324,17 +331,54 @@
 
     $('#submit_questionnaire').click(function () {
 
-        var questionnaireName = $('#questionnaireName').val();
+        var questionnaireName = $('#questionnaire-title').val();
 
-        var questionIdList = {};
+        var questionIdList = [];
 
-        $('#sortable2').children('li').each(function () {
+        $('#sortable2').find('li').each(function () {
             var questionId = $(this).attr('id');
-            questionIdList += questionIdList;
+            questionIdList.push(questionId);
         });
 
         if($('#questionnaire-submit-form').attr("data-questionnaire-id")) {
             var questionnaireId = $('#questionnaire-submit-form').attr("data-questionnaire-id");
+
+                // Submits the edited questionnaire form
+                var questionnaireFormData = {
+                    'questionnaireId': questionnaireId,
+                    'questionnaireTitle': questionnaireName,
+                    'questionIdList': JSON.stringify(questionIdList)
+            };
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/questionnaire",
+                    dataType: "json",
+                    data: questionnaireFormData,
+                    success: function (data) {
+                        console.log("Questionnaire update success");
+                    }
+                });
+
+        } else {
+
+            // Submits the new questionnaire form
+            var questionnaireFormData = {
+                'questionnaireTitle': questionnaireName,
+                'questionIdList': JSON.stringify(questionIdList)
+            };
+            $.ajax({
+                type: "POST",
+                url: "/api/questionnaire",
+                dataType: "json",
+                data: questionnaireFormData,
+                success: function (data) {
+                    console.log("Questionnaire creation success");
+
+//                    TODO:
+//                    Make this redirect to edit page
+                }
+            });
+
         }
 
     });

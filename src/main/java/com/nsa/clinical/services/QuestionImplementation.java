@@ -75,5 +75,13 @@ public class QuestionImplementation implements QuestionService {
         return question.getQuestionDescription();
     }
 
-
+    @Override
+    public List<Question> getQuestionsFromIds(JSONArray questionIdList) {
+        List<Question> questionList = new ArrayList<>();
+        for (Object id : questionIdList) {
+            String idString = id.toString();
+            questionList.add( questionRepository.findByQuestionId(Long.parseLong(idString)) );
+        }
+        return questionList;
+    }
 }

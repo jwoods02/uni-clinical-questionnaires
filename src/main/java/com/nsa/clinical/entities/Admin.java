@@ -37,7 +37,7 @@ public class Admin {
     private List<Questionnaire> questionnaires;
 
     public String toString() {
-        return "Admin(adminId=" + this.getAdminId() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ")";
+        return "";
     }
 
 
