@@ -1,12 +1,8 @@
 package com.nsa.clinical.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by c1571078 on 17/11/2017.
@@ -36,5 +32,9 @@ public class Option {
         this.optionDescription = optionDescription;
         this.optionOrder = optionOrder;
         this.question = question;
+    }
+
+    public Option() {
+
     }
 }

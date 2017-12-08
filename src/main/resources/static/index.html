@@ -108,6 +108,22 @@
 //                }));
             });
         })
+
+        $(document.body).on('click', '.delete-option', function () {
+            var theId = $(this).closest('li').attr('id');
+
+            $.ajax({
+                type: "POST",
+                url: "/api/questionnaire/delete",
+                dataType: 'json',
+                data: {id: theId},
+                success: function (data) {
+                    $('#'+theId).remove();
+                }
+            });
+        });
+
+
     });
 
 </script>
