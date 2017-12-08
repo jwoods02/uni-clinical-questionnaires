@@ -46,6 +46,25 @@
         margin-bottom: 0.5rem;
     }
 
+    body {
+        padding-bottom: 10px;
+    }
+    .input-group {
+        padding: 2px;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    span:hover {
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+        cursor: -webkit-grab;
+
+    }
+
 </style>
 
 <div id="navbar-template"></div>
@@ -106,24 +125,6 @@
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="create_question">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="../js/templates.js"></script>
 
 
@@ -136,7 +137,7 @@
         <p class="question-list-text">Question Title</p>
 
         <div class="btn-group input-group-btn">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" type="button">
+            <button class="btn btn-primary question-edit-button" type="button">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>
             <button class="btn btn-danger delete-option" type="button">
@@ -147,12 +148,6 @@
 
 </li>
 
-
-<script>
-    $( ".create_question" ).load( "create_question" );
-    $( ".create_question2" ).load( "create_question" );
-
-</script>
 
 <script>
     $(document.body).on('click', '.delete-option', function () {
@@ -239,6 +234,268 @@
         }
     }
 
+
+    // Removes an option
+    $(document.body).on('click', '.question-edit-button', function () {
+        window.questionListItem = $(this).closest('li');
+        $('#exampleModal').modal();
+
+    });
+
+
+    function updateQuestionName(id) {
+
+        $.ajax({
+            type: "GET",
+            url: "/api/question/name/"+id,
+            dataType: 'text',
+            success: function (data) {
+
+                $(questionListItem).find('.question-list-text').html(data);
+                questionListItem = null;
+
+            }
+        });
+
+        $('#exampleModal').modal('hide');
+
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<!--========================== CREATE QUESTION FORM ============================-->
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!--========================== QUESTION FORM START ============================-->
+
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>Create New Question</h1>
+                        <form class="form" id="questionForm" method="post" action="/api/question">
+                            <fieldset>
+
+                                <!-- Question-->
+                                <div class="form-group">
+                                    <label class="control-label" for="questionDescription">Question Description</label>
+                                    <input id="questionDescription" name="questionDescription" type="text" placeholder="Question Description" class="form-control input-md">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="selectType">Answer Type</label>
+                                    <select class="select form-control" id="selectType" name="selectType" onchange="onTypeChange()" required>
+                                        <option value="">
+                                            Select an Answer Type
+                                        </option>
+                                        <option value="1">
+                                            Radio Buttons
+                                        </option>
+                                        <option value="2">
+                                            Single Line Answer
+                                        </option>
+                                        <option value="3">
+                                            Multi-Line Answer
+                                        </option>
+                                        <option value="4">
+                                            Checkboxes
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Buttons inserted here when needed -->
+                                <div class="form-group" id="addOptionsButtonHere"></div>
+
+                                <!-- Options inserted here individually -->
+                                <div class="form-group" id="listWithHandle"></div>
+
+                                <!-- Submit button -->
+                                <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ======================================== Option templates ======================================================-->
+
+                <div class="hide" id="radio_buttons_template">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+                        <input class="form-control description" type="text" placeholder="Option Description">
+                        <span class="input-group-btn">
+            <button class="btn btn-danger removeOption" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </span>
+                    </div>
+                </div>
+
+                <div class="hide" id="single_line_template">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                        <input class="form-control" type="text" disabled>
+                    </div>
+                </div>
+
+                <div class="hide" id="multi_line_template">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                        <textarea class="form-control" rows="3" disabled></textarea>
+                    </div>
+                </div>
+
+                <div class="hide" id="check_boxes_template">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+                        <input class="form-control description" type="text" placeholder="Option Description">
+                        <span class="input-group-btn">
+            <button class="btn btn-danger removeOption" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </span>
+                    </div>
+                </div>
+
+                <!-- ======================================== Button templates ======================================================-->
+
+                <div class="hide" id="add_radio_option_template">
+                    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addRadioOption()">Add Option</button>
+                </div>
+
+                <div class="hide" id="add_checkbox_template">
+                    <button id="addOption" name="addOption" class="btn btn-outline-primary btn-block" type="button" onclick="addCheckboxOption()">Add Option</button>
+                </div>
+
+
+                <!--========================== QUESTION FORM ENDS ============================-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--========================== QUESTION FORM SCRIPTS ============================-->
+
+<script>
+
+    // Load templates depending on selected option type
+    var selectedValue;
+    function onTypeChange() {
+        selectedValue = document.getElementById('selectType').value;
+        if (selectedValue === "") {
+            $('#listWithHandle').empty();
+            $('#addOptionsButtonHere').empty();
+        } else if (selectedValue === "1") {
+            $('#listWithHandle').empty().append($("#radio_buttons_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_radio_option_template").html());
+        } else if (selectedValue === "2") {
+            $('#listWithHandle').empty().append($("#single_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (selectedValue === "3") {
+            $('#listWithHandle').empty().append($("#multi_line_template").html());
+            $('#addOptionsButtonHere').empty()
+        } else if (selectedValue === "4") {
+            $('#listWithHandle').empty().append($("#check_boxes_template").html());
+            $('#addOptionsButtonHere').empty().append($("#add_checkbox_template").html());
+        }
+        return selectedValue;
+    }
+
+    // Adds a new radio button option
+    function addRadioOption() {
+        $("#listWithHandle").append($("#radio_buttons_template").html());
+    }
+
+    // Adds a new checkbox option
+    function addCheckboxOption() {
+        $("#listWithHandle").append($("#check_boxes_template").html());
+    }
+
+    // Removes an option
+    $(document.body).on('click', '.removeOption', function () {
+        $(this).closest('.input-group').remove();
+    });
+
+    // Makes listWithHandle div sortable so options can be reordered.
+    // Referenced from: https://github.com/RubaXa/Sortable/blob/master/README.md
+    Sortable.create(listWithHandle, {
+        handle: '.input-group-addon',
+        cursor: 'move',
+        animation: 125
+    });
+
+
+    // Gets option description and order from each template child.
+    var allOptions = [];
+    function getMultipleOptions() {
+        if (document.getElementById('selectType').value === ("1" || "4")) {
+            var ancestor = document.getElementById('listWithHandle'),
+                descendants = ancestor.getElementsByClassName('description');
+
+            for (i = 0; i < descendants.length; i++) {
+                var current = descendants[i];
+                allOptions.push(current.value);
+                allOptions.push(i + 1);
+            }
+            return allOptions;
+        }
+        return allOptions;
+    }
+
+
+    // Submits the new question with options
+    $('#questionForm').submit(function (event) {
+        event.preventDefault(); // Stops the form submitting twice
+//        alert(JSON.stringify(getMultipleOptions()));
+        var questionFormData = {
+            'questionDescription': $('input[name=questionDescription]').val(),
+            'questionType': selectedValue,
+            'options': JSON.stringify(getMultipleOptions())
+        };
+        $.ajax({
+            type: "POST",
+            url: "/api/question",
+            dataType: 'json',
+            data: questionFormData,
+            success: function (data) {
+
+                $(window.questionListItem).attr('id', data);
+                updateQuestionName(data);
+
+
+
+            }
+        });
+    });
 
 </script>
 </body>

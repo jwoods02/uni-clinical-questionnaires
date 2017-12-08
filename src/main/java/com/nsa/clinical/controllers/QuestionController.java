@@ -5,11 +5,8 @@ import com.nsa.clinical.forms.NewQuestionForm;
 import com.nsa.clinical.forms.UpdateQuestionForm;
 import com.nsa.clinical.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,9 +24,9 @@ public class QuestionController {
     }
 
     @RequestMapping(path = "/question", method = RequestMethod.POST)
-    public ResponseEntity createQuestion(NewQuestionForm newQuestionForm){
-        questionService.newQuestion(newQuestionForm);
-        return new ResponseEntity(HttpStatus.OK);
+    public Long createQuestion(NewQuestionForm newQuestionForm){
+        Long questionId = questionService.newQuestion(newQuestionForm);
+        return questionId;
     }
     @RequestMapping(path = "/question/allQuestions/get", method = RequestMethod.GET)
     public @ResponseBody
@@ -39,6 +36,12 @@ public class QuestionController {
     @RequestMapping(path = "/question/updateQuestion", method = RequestMethod.POST)
     public void updateQuestion(UpdateQuestionForm updateQuestionForm){
         questionService.updateQuestion(updateQuestionForm.getQuestionID(),updateQuestionForm.getQuestionName());
+    }
+
+    @RequestMapping(path = "/question/name/{id}", method = RequestMethod.GET)
+    public String getQuestionName(@PathVariable Integer id) {
+
+        return questionService.getQuestionName(id.longValue());
     }
 
 

@@ -2,10 +2,8 @@ package com.nsa.clinical.services;
 
 import com.nsa.clinical.entities.Option;
 import com.nsa.clinical.entities.Question;
-import com.nsa.clinical.forms.NewOptionForm;
 import com.nsa.clinical.forms.NewQuestionForm;
 import com.nsa.clinical.repositories.QuestionRepository;
-import com.nsa.clinical.repositories.QuestionnaireRepository;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class QuestionImplementation implements QuestionService {
     }
 
     @Override
-    public void newQuestion(NewQuestionForm form){
+    public Long newQuestion(NewQuestionForm form){
         JSONArray unconvertedOptions = form.getOptions();
         Integer type = form.getQuestionType();
         String questionDescription = form.getQuestionDescription();
@@ -50,6 +48,8 @@ public class QuestionImplementation implements QuestionService {
         } else if ((type == 2 )|| (type == 3)) {
             questionRepository.saveAndFlush(newQuestion);
         }
+
+        return newQuestion.getQuestionId();
     }
 
     @Override
@@ -68,4 +68,12 @@ public class QuestionImplementation implements QuestionService {
         question.setQuestionDescription(questionName);
         questionRepository.saveAndFlush(question);
     }
+
+    @Override
+    public String getQuestionName(Long id) {
+        Question question = questionRepository.findByQuestionId(id);
+        return question.getQuestionDescription();
+    }
+
+
 }
