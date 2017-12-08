@@ -115,7 +115,7 @@
             $.ajax({
                 type: "POST",
                 url: "/api/questionnaire/delete",
-                dataType: 'json',
+                dataType: 'text',
                 data: {id: theId},
                 success: function (data) {
                     $('#'+theId).remove();
