@@ -4,6 +4,7 @@ import com.nsa.clinical.entities.Questionnaire;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONArray;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,6 @@ import java.util.Optional;
 public class NewQuestionForm {
     private String questionDescription;
     private Integer questionType;
-    private List<List> options;
+    private JSONArray options;
     private Questionnaire questionnaire;
 }

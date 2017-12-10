@@ -2,9 +2,11 @@ package com.nsa.clinical.services;
 
 import com.nsa.clinical.entities.Option;
 import com.nsa.clinical.entities.Question;
+import com.nsa.clinical.forms.NewOptionForm;
 import com.nsa.clinical.forms.NewQuestionForm;
 import com.nsa.clinical.repositories.QuestionRepository;
 import com.nsa.clinical.repositories.QuestionnaireRepository;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,7 @@ public class QuestionImplementation implements QuestionService {
 
     @Override
     public void newQuestion(NewQuestionForm form){
-        List<List> unconvertedOptions = form.getOptions();
+        JSONArray unconvertedOptions = form.getOptions();
         Integer type = form.getQuestionType();
         String questionDescription = form.getQuestionDescription();
         Question newQuestion = new Question(questionDescription, type);
@@ -34,9 +36,9 @@ public class QuestionImplementation implements QuestionService {
         List<Option> newOptions = new ArrayList<>();
 
         if((type == 1 )|| (type == 4)) {
-            for (List unconvertedOption : unconvertedOptions) {
-                String optionDescription = (String) unconvertedOption.get(0);
-                Integer order = (Integer) unconvertedOption.get(1);
+            for (int i = 0; i<unconvertedOptions.length(); i+=2) {
+                String optionDescription = unconvertedOptions.getString(i);
+                Integer order = unconvertedOptions.getInt(i+1);
 
                 Option newOption = new Option(optionDescription, order, newQuestion);
                 newOptions.add(newOption);
