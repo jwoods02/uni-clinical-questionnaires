@@ -76,59 +76,7 @@
 
 <script src="../js/templates.js"></script>
 
-<script>
-
-
-    // Ensures that the drop down is populated with questionnaires as soon as the page loads.
-    $(document).ready(function() {
-        var template = $(".questionnaire-template").clone();
-
-        $(template).removeClass('hide');
-
-        $.ajax({
-            url: "/api/questionnaire/allQuestionnaires/get",
-            type: "GET",
-            dataType: "json"
-        }).done(function (data) {
-            // Iterates each questionnaire object and appends a new option to the drop down with value set as id
-            data.forEach(function (questionnaire) {
-                var this_template = template;
-
-                $(this_template).attr('id', questionnaire.questionnaireId);
-
-                $(this_template).find('.edit-btn').attr('href', '/api/interface?q=' + questionnaire.questionnaireId);
-
-                $(this_template).find('.questionnaire-text').html(questionnaire.questionnaireTitle);
-
-                $("#questions-here").append($(this_template).clone());
-
-
-
-//                $("#select_questionnaire").append($("<option/>", {
-//                    value: questionnaire.questionnaireId,
-//                    text: questionnaire.questionnaireTitle
-//                }));
-            });
-        })
-
-        $(document.body).on('click', '.delete-option', function () {
-            var theId = $(this).closest('li').attr('id');
-
-            $.ajax({
-                type: "POST",
-                url: "/api/questionnaire/delete",
-                dataType: 'text',
-                data: {id: theId},
-                success: function (data) {
-                    $('#'+theId).remove();
-                }
-            });
-        });
-
-
-    });
-
-</script>
+<script src="../js/index.js"></script>
 
 </body>
 </html>

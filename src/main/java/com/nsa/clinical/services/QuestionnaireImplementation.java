@@ -27,9 +27,15 @@ public class QuestionnaireImplementation implements QuestionnaireService {
         Questionnaire newQuestionnaire = new Questionnaire();
         newQuestionnaire.setQuestionnaireTitle(title);
         newQuestionnaire.setQuestions(questionList);
+        for(Question question: questionList) {
+            question.setQuestionnaire(newQuestionnaire);
+        }
         questionnaireRepository.saveAndFlush(newQuestionnaire);
-//        TODO:
-//        Figure out why this doesn't link the questions to the questionnaire. FFS.'
+
+//       TODO:
+//       Save question order in questionnaire
+//       Delete deleted questions from database
+//       Saved changes alert
     }
 
     @Override
@@ -37,6 +43,9 @@ public class QuestionnaireImplementation implements QuestionnaireService {
         Questionnaire updateQuestionnaire = questionnaireRepository.findByQuestionnaireId(id);
         updateQuestionnaire.setQuestionnaireTitle(title);
         updateQuestionnaire.setQuestions(questionList);
+        for(Question question: questionList) {
+            question.setQuestionnaire(updateQuestionnaire);
+        }
         questionnaireRepository.saveAndFlush(updateQuestionnaire);
 
     }
