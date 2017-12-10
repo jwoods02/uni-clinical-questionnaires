@@ -17,7 +17,7 @@
 <div class="container">
     <h1>Questionnaire Previewer</h1>
     <p>Please select an existing questionnaire from the drop down menu to preview it below.</p>
-    <form action="/api/questionnaire/get" method="GET">
+    <form action="/api/questionnaire/get" method="GET" id="get_questionnaire">
         <div class="form-row">
             <div class="col-md-6">
                 <label class="sr-only" for="select_questionnaire">Select</label>
@@ -30,7 +30,13 @@
             </div>
         </div>
     </form>
+    <div class="questionnaireTitle">
+    </div>
+    <div class="questionnaireDescription"></div>
+    <div class="dateCreated"></div>
 </div>
+
+
 
 <script src="../js/templates.js"></script>
 
@@ -53,6 +59,26 @@
             });
         })
     });
+
+
+        $("#get_questionnaire").submit(function(e){
+            var questionnaire_data = {
+                'id':$
+            }
+            $.ajax({
+                url: "/api/questionnaire/allQuestionnaires/get",
+                type: "GET",
+                dataType: "json"
+            }).done(function (data){
+                data.forEach(function (questionnaire) {
+                    $(".questionnaireTitle").html(questionnaire.questionnaireTitle);
+                    $(".questionnaireDescription").html(questionnaire.questionnaireDescription);
+                    $(".dateCreated").html(questionnaire.dateCreated);
+                })
+
+        })
+    })
+
 
 </script>
 
