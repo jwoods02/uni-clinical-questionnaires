@@ -16,4 +16,5 @@ public interface QuestionService {
     void updateQuestion(Long questionID, String questionName);
     String getQuestionName(Long id);
     List<Question> getQuestionsFromIds(JSONArray questionIdList);
+    void deleteQuestion(Long id);
 }
