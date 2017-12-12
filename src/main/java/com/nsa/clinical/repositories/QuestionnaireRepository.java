@@ -1,6 +1,5 @@
 package com.nsa.clinical.repositories;
 
-import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,5 +11,5 @@ import java.util.List;
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire,Long> {
     List<Questionnaire>findAll();
 
-    Questionnaire findByQuestionnaireId(long id);
+    Questionnaire findByQuestionnaireId(Long id);
 }

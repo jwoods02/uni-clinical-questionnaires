@@ -32,7 +32,13 @@ public class Admin {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy="admin",fetch = FetchType.LAZY, targetEntity=Questionnaire.class)
+    @OneToMany(mappedBy="admin", fetch = FetchType.LAZY, targetEntity=Questionnaire.class)
     @JsonIgnore
     private List<Questionnaire> questionnaires;
+
+    public String toString() {
+        return "";
+    }
+
+
 }
