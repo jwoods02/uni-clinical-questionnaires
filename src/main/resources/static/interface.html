@@ -355,8 +355,8 @@
 
 
     // Gets option description and order from each template child.
-    var allOptions = [];
     function getMultipleOptions() {
+        var allOptions = [];
         if (document.getElementById('selectType').value === ("1" || "4")) {
             var ancestor = document.getElementById('listWithHandle'),
                 descendants = ancestor.getElementsByClassName('description');
@@ -375,7 +375,6 @@
     // Submits the new question with options
     $('#questionForm').submit(function (event) {
         event.preventDefault(); // Stops the form submitting twice
-//        alert(JSON.stringify(getMultipleOptions()));
         var questionFormData = {
             'questionDescription': $('input[name=questionDescription]').val(),
             'questionType': selectedValue,

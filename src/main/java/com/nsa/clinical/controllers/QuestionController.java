@@ -33,6 +33,7 @@ public class QuestionController {
     List<Question> getAllStoredQuestions(){
         return questionService.retrieveAllQuestions();
     }
+
     @RequestMapping(path = "/question/updateQuestion", method = RequestMethod.POST)
     public void updateQuestion(UpdateQuestionForm updateQuestionForm){
         questionService.updateQuestion(updateQuestionForm.getQuestionID(),updateQuestionForm.getQuestionName());
@@ -42,6 +43,12 @@ public class QuestionController {
     public String getQuestionName(@PathVariable Integer id) {
 
         return questionService.getQuestionName(id.longValue());
+    }
+
+    @RequestMapping(path = "/question/{id}", method = RequestMethod.GET)
+    public Question getQuestion(@PathVariable Integer id) {
+
+        return questionService.getQuestion(id.longValue());
     }
 
 
