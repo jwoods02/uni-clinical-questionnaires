@@ -1,5 +1,6 @@
 package com.nsa.clinical.services;
 
+import com.nsa.clinical.entities.Question;
 import com.nsa.clinical.entities.Questionnaire;
 
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.List;
  */
 public interface QuestionnaireService {
 
-    void newQuestionnaire(String description);
+    void newQuestionnaire(String title, List<Question> questionList);
+
+    void updateQuestionnaire(Long id, String title, List<Question> questionList);
 
     Questionnaire retrieveQuestionnaire(Long QuestionnaireId);
 
@@ -17,4 +20,5 @@ public interface QuestionnaireService {
 
     void deleteQuestionnaire(Long id);
 
+    List<Question> retrieveAllQuestionsInQuestionnaire(Long id);
 }

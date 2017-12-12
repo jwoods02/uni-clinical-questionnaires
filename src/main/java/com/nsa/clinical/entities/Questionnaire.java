@@ -38,11 +38,20 @@ public class Questionnaire {
     @JsonIgnore
     private List<Question> questions;
 
-    public Questionnaire() {
-
+    public Questionnaire(String questionnaireTitle, List<Question> questions) {
+        this.questionnaireTitle = questionnaireTitle;
+        this.questions = questions;
     }
 
     public Questionnaire(String questionnaireTitle) {
         this.questionnaireTitle = questionnaireTitle;
+    }
+
+    public Questionnaire() {
+
+    }
+
+    public String toString() {
+        return "";
     }
 }

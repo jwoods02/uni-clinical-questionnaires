@@ -3,15 +3,17 @@ package com.nsa.clinical.forms;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONArray;
 
 /**
- * Created by c1673142 on 07-Dec-17.
+ * Created by James on 08/12/2017.
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateQuestionForm {
-    private Long questionID;
+public class UpdateQuestionnaireForm {
+    private long questionnaireId;
     private String questionnaireTitle;
-    private String questionName;
+    private JSONArray questionIdList;
 }
