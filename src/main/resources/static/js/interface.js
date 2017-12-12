@@ -123,7 +123,7 @@ $(document.body).on('click', '.question-edit-button', function () {
                     dataType: 'json',
                     success: function (optionData) {
                         // If type is multiple choice/checkbox then load the options
-                        if (data.questionType === (1 || 4)) {
+                        if ((data.questionType === 1)|| (data.questionType === 4)) {
 
                             // Adds the correct number of option templates to the page
                             for (i=1; i < optionData.length; i++) {
