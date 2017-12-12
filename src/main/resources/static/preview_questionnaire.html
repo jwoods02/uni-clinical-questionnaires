@@ -63,20 +63,19 @@
 
         $("#get_questionnaire").submit(function(e){
             var questionnaire_data = {
-                'id':$
-            }
+                'id': $('#select_questionnaire').find(":selected").val()
+            };
             $.ajax({
-                url: "/api/questionnaire/allQuestionnaires/get",
+                url: "/api/questionnaire/get",
                 type: "GET",
+                data: questionnaire_data,
                 dataType: "json"
             }).done(function (data){
-                data.forEach(function (questionnaire) {
-                    $(".questionnaireTitle").html(questionnaire.questionnaireTitle);
-                    $(".questionnaireDescription").html(questionnaire.questionnaireDescription);
-                    $(".dateCreated").html(questionnaire.dateCreated);
-                })
-
-        })
+                $(".questionnaireTitle").html(data.questionnaireTitle);
+                $(".questionnaireDescription").html(data.questionnaireDescription);
+                $(".dateCreated").html(data.dateCreated);
+        });
+            e.preventDefault();
     })
 
 
