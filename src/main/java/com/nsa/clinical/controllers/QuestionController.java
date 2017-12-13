@@ -45,6 +45,11 @@ public class QuestionController {
         return questionService.getQuestionName(id.longValue());
     }
 
+    @RequestMapping(path = "/question/{id}", method = RequestMethod.DELETE)
+    public void deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
+    }
+
     @RequestMapping(path = "/question/{id}", method = RequestMethod.GET)
     public Question getQuestion(@PathVariable Integer id) {
 
@@ -53,5 +58,5 @@ public class QuestionController {
 
 
     // @RequestMapping(path = "/question", method = RequestMethod.GET)
-    // Example of different RequestMethod's for different API calls, using HTTP words
+    // Example of different RequestMethod's for different API calls, using HTTP verbs
 }
