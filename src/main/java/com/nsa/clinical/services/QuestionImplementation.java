@@ -71,6 +71,11 @@ public class QuestionImplementation implements QuestionService {
     }
 
     @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.delete(id);
+    }
+
+    @Override
     public List<Question> getQuestionsFromIds(JSONArray questionIdList) {
         List<Question> questionList = new ArrayList<>();
         for (Object id : questionIdList) {

@@ -178,5 +178,16 @@ function updateQuestionName(id) {
 
 // When delete button has been pressed
 $(document.body).on('click', '.delete-option', function () {
+    var id = $(this).closest('li').attr('id');
+
+    $.ajax({
+        type: "DELETE",
+        url: "/api/question/"+id,
+        dataType: 'text',
+        success: function () {
+        }
+    });
+
     $(this).closest('li').remove();
+
 });

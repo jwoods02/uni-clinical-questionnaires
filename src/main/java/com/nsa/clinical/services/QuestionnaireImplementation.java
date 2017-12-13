@@ -34,7 +34,6 @@ public class QuestionnaireImplementation implements QuestionnaireService {
 
 //       TODO:
 //       Save question order in questionnaire
-//       Delete deleted questions from database
 //       Saved changes alert
     }
 

@@ -19,7 +19,7 @@
 <body>
 
 <style>
-    
+
     .hide {
         display: none;
     }
@@ -57,7 +57,7 @@
         cursor: pointer;
     }
 
-    span:hover {
+    .fa-bars:hover {
         cursor: move; /* fallback if grab cursor is unsupported */
         cursor: grab;
         cursor: -moz-grab;
@@ -79,7 +79,7 @@
                 <!-- Question-->
                 <div class="form-group">
                     <label class="control-label" for="questionnaire-title">Questionnaire Title</label>
-                    <input id="questionnaire-title" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md">
+                    <input id="questionnaire-title" name="description" type="text" placeholder="Questionnaire Title" class="form-control input-md" required>
                     <span class="help-block">Write the questionnaire title here</span>
                 </div>
 
@@ -96,7 +96,7 @@
     <div class="row">
         <ul id="sortable" class="col-md-3 text-center connected-sortable">
             <li class="card ui-state-default multiple-choice">
-                    <p class="card-header">Multiple Choice</p>
+                <p class="card-header">Multiple Choice</p>
             </li>
             <li class="card ui-state-default radio-button">
                 <div class="card-block">
@@ -206,7 +206,7 @@
                                 <!-- Question-->
                                 <div class="form-group">
                                     <label class="control-label" for="questionDescription">Question Description</label>
-                                    <input id="questionDescription" name="questionDescription" type="text" placeholder="Question Description" class="form-control input-md">
+                                    <input id="questionDescription" name="questionDescription" type="text" placeholder="Question Description" class="form-control input-md" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="selectType">Answer Type</label>
@@ -247,7 +247,7 @@
                 <div class="hide" id="radio_buttons_template">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-                        <input class="form-control description" type="text" placeholder="Option Description">
+                        <input class="form-control description" type="text" placeholder="Option Description" required>
                         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -273,7 +273,7 @@
                 <div class="hide" id="check_boxes_template">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-bars" aria-hidden="true"></i></span>
-                        <input class="form-control description" type="text" placeholder="Option Description">
+                        <input class="form-control description" type="text" placeholder="Option Description" required>
                         <span class="input-group-btn">
             <button class="btn btn-danger removeOption" type="button">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -375,6 +375,18 @@
     // Submits the new question with options
     $('#questionForm').submit(function (event) {
         event.preventDefault(); // Stops the form submitting twice
+
+        var id = $(window.questionListItem).attr('id');
+        if (id !== null) {
+            $.ajax({
+                type: "DELETE",
+                url: "/api/question/"+id,
+                dataType: 'text',
+                success: function () {
+                }
+            });
+        }
+
         var questionFormData = {
             'questionDescription': $('input[name=questionDescription]').val(),
             'questionType': selectedValue,
@@ -382,7 +394,7 @@
         };
         $.ajax({
             type: "POST",
-            url: "/api/question",
+            url: "/api/question/",
             dataType: 'json',
             data: questionFormData,
             success: function (data) {
@@ -390,9 +402,6 @@
                 $(window.questionListItem).attr('id', data);
                 $(window.questionListItem).attr('id');
                 updateQuestionName(data);
-
-
-
             }
         });
     });
