@@ -38,23 +38,29 @@
 <div class = "templates" style="display:none;">
     <div class="radio-list">
         <div class="form-check form-check-inline">
+            <label class="name"></label>
+            <br>
             <label class="form-check-label">
                 <input class="form-check-input radio-agree" type="radio" name="inlineRadioOptions" value="0">
-                Agree
+                1
             </label>
             <label class="form-check-label">
                 <input class="form-check-input radio-disagree" type="radio" name="inlineRadioOptions" value="1">
-                Disagree
+                2
             </label>
         </div>
     </div>
     <div class="text-input">
+
         <div class="form-group">
+            <label class="name"></label>
             <input type="text" class="form-control">
         </div>
     </div>
+
     <div class="multiline-text-input">
         <div class="form-group">
+            <label class="name"></label>
             <textarea class="form-control" rows="3"></textarea>
         </div>
     </div>
@@ -95,16 +101,19 @@
                     case 1:
                         group = $(".templates .radio-list div").clone();
                         group.find("input").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
                         preview.append(group);
                         break;
                     case 2:
                         group = $(".templates .text-input div").clone();
                         group.find("input").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
                         preview.append(group);
                         break;
                     case 3:
                         group = $(".templates .multiline-text-input div").clone();
                         group.find("textarea").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
                         preview.append(group);
                         break;
                 }
