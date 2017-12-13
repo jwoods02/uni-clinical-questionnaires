@@ -33,6 +33,7 @@ public class QuestionController {
     List<Question> getAllStoredQuestions(){
         return questionService.retrieveAllQuestions();
     }
+
     @RequestMapping(path = "/question/updateQuestion", method = RequestMethod.POST)
     public void updateQuestion(UpdateQuestionForm updateQuestionForm){
         questionService.updateQuestion(updateQuestionForm.getQuestionID(),updateQuestionForm.getQuestionName());
@@ -44,7 +45,18 @@ public class QuestionController {
         return questionService.getQuestionName(id.longValue());
     }
 
+    @RequestMapping(path = "/question/{id}", method = RequestMethod.DELETE)
+    public void deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
+    }
+
+    @RequestMapping(path = "/question/{id}", method = RequestMethod.GET)
+    public Question getQuestion(@PathVariable Integer id) {
+
+        return questionService.getQuestion(id.longValue());
+    }
+
 
     // @RequestMapping(path = "/question", method = RequestMethod.GET)
-    // Example of different RequestMethod's for different API calls, using HTTP words
+    // Example of different RequestMethod's for different API calls, using HTTP verbs
 }

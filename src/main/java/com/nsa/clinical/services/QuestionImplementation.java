@@ -53,11 +53,6 @@ public class QuestionImplementation implements QuestionService {
     }
 
     @Override
-    public Question retrieveQuestion(Long questionID) {
-        return questionRepository.findByQuestionId(questionID);
-    }
-
-    @Override
     public List<Question> retrieveAllQuestions() {
         return questionRepository.findAll();
     }
@@ -76,6 +71,11 @@ public class QuestionImplementation implements QuestionService {
     }
 
     @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.delete(id);
+    }
+
+    @Override
     public List<Question> getQuestionsFromIds(JSONArray questionIdList) {
         List<Question> questionList = new ArrayList<>();
         for (Object id : questionIdList) {
@@ -83,5 +83,10 @@ public class QuestionImplementation implements QuestionService {
             questionList.add( questionRepository.findByQuestionId(Long.parseLong(idString)) );
         }
         return questionList;
+    }
+
+    @Override
+    public  Question getQuestion(Long id) {
+        return questionRepository.findByQuestionId(id);
     }
 }

@@ -11,9 +11,10 @@ import java.util.List;
  */
 public interface QuestionService {
     Long newQuestion(NewQuestionForm newQuestionForm);
-    Question retrieveQuestion(Long questionId);
     List<Question> retrieveAllQuestions();
     void updateQuestion(Long questionID, String questionName);
     String getQuestionName(Long id);
+    Question getQuestion(Long id);
     List<Question> getQuestionsFromIds(JSONArray questionIdList);
+    void deleteQuestion(Long id);
 }

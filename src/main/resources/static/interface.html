@@ -19,7 +19,7 @@
 <body>
 
 <style>
-    
+
     .hide {
         display: none;
     }
@@ -57,7 +57,7 @@
         cursor: pointer;
     }
 
-    span:hover {
+    .fa-bars:hover {
         cursor: move; /* fallback if grab cursor is unsupported */
         cursor: grab;
         cursor: -moz-grab;
@@ -96,7 +96,7 @@
     <div class="row">
         <ul id="sortable" class="col-md-3 text-center connected-sortable">
             <li class="card ui-state-default multiple-choice">
-                    <p class="card-header">Multiple Choice</p>
+                <p class="card-header">Multiple Choice</p>
             </li>
             <li class="card ui-state-default radio-button">
                 <div class="card-block">
@@ -355,8 +355,8 @@
 
 
     // Gets option description and order from each template child.
-    var allOptions = [];
     function getMultipleOptions() {
+        var allOptions = [];
         if (document.getElementById('selectType').value === ("1" || "4")) {
             var ancestor = document.getElementById('listWithHandle'),
                 descendants = ancestor.getElementsByClassName('description');
@@ -375,7 +375,18 @@
     // Submits the new question with options
     $('#questionForm').submit(function (event) {
         event.preventDefault(); // Stops the form submitting twice
-//        alert(JSON.stringify(getMultipleOptions()));
+
+        var id = $(window.questionListItem).attr('id');
+        if (id !== null) {
+            $.ajax({
+                type: "DELETE",
+                url: "/api/question/"+id,
+                dataType: 'text',
+                success: function () {
+                }
+            });
+        }
+
         var questionFormData = {
             'questionDescription': $('input[name=questionDescription]').val(),
             'questionType': selectedValue,
@@ -383,7 +394,7 @@
         };
         $.ajax({
             type: "POST",
-            url: "/api/question",
+            url: "/api/question/",
             dataType: 'json',
             data: questionFormData,
             success: function (data) {
@@ -391,9 +402,6 @@
                 $(window.questionListItem).attr('id', data);
                 $(window.questionListItem).attr('id');
                 updateQuestionName(data);
-
-
-
             }
         });
     });
