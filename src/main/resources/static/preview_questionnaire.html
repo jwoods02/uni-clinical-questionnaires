@@ -94,7 +94,7 @@
                 switch (question.questionType) {
                     case 1:
                         group = $(".templates .radio-list div").clone();
-                        group.find("input").attr("id", String.valueOf(question.questionID.toString));
+                        group.find("input").attr("id", String.valueOf(question.questionID));
                         preview.append(group);
                         break;
                     case 2:
