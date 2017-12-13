@@ -15,21 +15,21 @@
 <div id="navbar-template"></div>
 
 <div class="container">
-    <h1>Questionnaire Previewer</h1>
-    <p>Please select an existing questionnaire from the drop down menu to preview it below.</p>
-    <form action="/api/questionnaire/get" method="GET" id="get_questionnaire">
-        <div class="form-row">
-            <div class="col-md-6">
-                <label class="sr-only" for="select_questionnaire">Select</label>
-                <select required class="form-control" id="select_questionnaire" name="id">
-                    <option value="" selected>Select</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </form>
+    <!--<h1>Questionnaire Previewer</h1>-->
+    <!--<p>Please select an existing questionnaire from the drop down menu to preview it below.</p>-->
+    <!--<form action="/api/questionnaire/get" method="GET" id="get_questionnaire">-->
+        <!--<div class="form-row">-->
+            <!--<div class="col-md-6">-->
+                <!--<label class="sr-only" for="select_questionnaire">Select</label>-->
+                <!--<select required class="form-control" id="select_questionnaire" name="id">-->
+                    <!--<option value="" selected>Select</option>-->
+                <!--</select>-->
+            <!--</div>-->
+            <!--<div class="col-md-2">-->
+                <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
     <form class="preview">
 
     </form>
@@ -70,28 +70,29 @@
 
 <script>
     // Ensures that the drop down is populated with questionnaires as soon as the page loads.
-    $(document).ready(function() {
-        $.ajax({
-            url: "/api/questionnaire/allQuestionnaires/get",
-            type: "GET",
-            dataType: "json"
-        }).done(function (data) {
+    <!--$(document).ready(function() {-->
+        <!--$.ajax({-->
+            <!--url: "/api/questionnaire/allQuestionnaires/get",-->
+            <!--type: "GET",-->
+            <!--dataType: "json"-->
+        <!--}).done(function (data) {-->
             // Iterates each questionnaire object and appends a new option to the drop down with value set as id
-            data.forEach(function (questionnaire) {
-                $("#select_questionnaire").append($("<option/>", {
-                    value: questionnaire.questionnaireId,
-                    text: questionnaire.questionnaireTitle
-                }));
-            });
-        })
-    });
+            <!--data.forEach(function (questionnaire) {-->
+                <!--$("#select_questionnaire").append($("<option/>", {-->
+                    <!--value: questionnaire.questionnaireId,-->
+                    <!--text: questionnaire.questionnaireTitle-->
+                <!--}));-->
+            <!--});-->
+        <!--})-->
+    <!--});-->
 
 
-    $("#get_questionnaire").submit(function(e){
+        $(document).ready(function() {
         var preview = $("form.preview");
-        preview.empty();
+        var urlParams = new URLSearchParams(window.location.search);
+            preview.empty();
         $.ajax({
-            url: "/api/questionnaire/questions/" + $('#select_questionnaire').find(":selected").val(),
+            url: "/api/questionnaire/questions/" + urlParams.get('q'),
             type: "GET",
             dataType: "json"
         }).done(function (data){
