@@ -15,44 +15,114 @@
 <div id="navbar-template"></div>
 
 <div class="container">
-    <h1>Questionnaire Previewer</h1>
-    <p>Please select an existing questionnaire from the drop down menu to preview it below.</p>
-    <form action="/api/questionnaire/get" method="GET">
-        <div class="form-row">
-            <div class="col-md-6">
-                <label class="sr-only" for="select_questionnaire">Select</label>
-                <select required class="form-control" id="select_questionnaire" name="id">
-                    <option value="" selected>Select</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+    <!--<h1>Questionnaire Previewer</h1>-->
+    <!--<p>Please select an existing questionnaire from the drop down menu to preview it below.</p>-->
+    <!--<form action="/api/questionnaire/get" method="GET" id="get_questionnaire">-->
+        <!--<div class="form-row">-->
+            <!--<div class="col-md-6">-->
+                <!--<label class="sr-only" for="select_questionnaire">Select</label>-->
+                <!--<select required class="form-control" id="select_questionnaire" name="id">-->
+                    <!--<option value="" selected>Select</option>-->
+                <!--</select>-->
+            <!--</div>-->
+            <!--<div class="col-md-2">-->
+                <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+    <form class="preview">
+
     </form>
+</div>
+
+<div class = "templates" style="display:none;">
+    <div class="radio-list">
+        <div class="form-check form-check-inline">
+            <label class="name"></label>
+            <br>
+            <label class="form-check-label">
+                <input class="form-check-input radio-agree" type="radio" name="inlineRadioOptions" value="0">
+                1
+            </label>
+            <label class="form-check-label">
+                <input class="form-check-input radio-disagree" type="radio" name="inlineRadioOptions" value="1">
+                2
+            </label>
+        </div>
+    </div>
+    <div class="text-input">
+
+        <div class="form-group">
+            <label class="name"></label>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="multiline-text-input">
+        <div class="form-group">
+            <label class="name"></label>
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+    </div>
 </div>
 
 <script src="../js/templates.js"></script>
 
 <script>
-
-
     // Ensures that the drop down is populated with questionnaires as soon as the page loads.
-    $(document).ready(function() {
+    <!--$(document).ready(function() {-->
+        <!--$.ajax({-->
+            <!--url: "/api/questionnaire/allQuestionnaires/get",-->
+            <!--type: "GET",-->
+            <!--dataType: "json"-->
+        <!--}).done(function (data) {-->
+            // Iterates each questionnaire object and appends a new option to the drop down with value set as id
+            <!--data.forEach(function (questionnaire) {-->
+                <!--$("#select_questionnaire").append($("<option/>", {-->
+                    <!--value: questionnaire.questionnaireId,-->
+                    <!--text: questionnaire.questionnaireTitle-->
+                <!--}));-->
+            <!--});-->
+        <!--})-->
+    <!--});-->
+
+
+        $(document).ready(function() {
+        var preview = $("form.preview");
+        var urlParams = new URLSearchParams(window.location.search);
+            preview.empty();
         $.ajax({
-            url: "/api/questionnaire/allQuestionnaires/get",
+            url: "/api/questionnaire/questions/" + urlParams.get('q'),
             type: "GET",
             dataType: "json"
-        }).done(function (data) {
-            // Iterates each questionnaire object and appends a new option to the drop down with value set as id
-            data.forEach(function (questionnaire) {
-                $("#select_questionnaire").append($("<option/>", {
-                    value: questionnaire.questionnaireId,
-                    text: questionnaire.questionnaireTitle
-                }));
-            });
-        })
-    });
+        }).done(function (data){
+            data.forEach(function (question) {
+                var group;
+                switch (question.questionType) {
+                    case 1:
+                        group = $(".templates .radio-list div").clone();
+                        group.find("input").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
+                        preview.append(group);
+                        break;
+                    case 2:
+                        group = $(".templates .text-input div").clone();
+                        group.find("input").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
+                        preview.append(group);
+                        break;
+                    case 3:
+                        group = $(".templates .multiline-text-input div").clone();
+                        group.find("textarea").attr("id", String.valueOf(question.questionID));
+                        group.find(".name").html(question.questionDescription);
+                        preview.append(group);
+                        break;
+                }
+            })
+        });
+        e.preventDefault();
+    })
+
 
 </script>
 

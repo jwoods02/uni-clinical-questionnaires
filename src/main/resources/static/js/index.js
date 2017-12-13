@@ -20,6 +20,7 @@ $(document).ready(function() {
 
             // Add id, edit button link and title
             $(this_template).attr('id', questionnaire.questionnaireId);
+            $(this_template).find('.preview-btn').attr('href', '/api/preview_questionnaire?q=' + questionnaire.questionnaireId);
             $(this_template).find('.edit-btn').attr('href', '/api/interface?q=' + questionnaire.questionnaireId);
             $(this_template).find('.questionnaire-text').html(questionnaire.questionnaireTitle);
 
