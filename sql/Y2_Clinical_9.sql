@@ -39,9 +39,9 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `y2_clinical_9`.`questionnaire` (
   `questionnaire_id` INT(11) NOT NULL AUTO_INCREMENT,
   `questionnaire_title` TEXT NOT NULL,
-  `questionnaire_description` TEXT NOT NULL,
-  `date_created` DATETIME NOT NULL,
-  `admin_id` INT(11) NOT NULL,
+  `questionnaire_description` TEXT NULL,
+  `date_created` DATETIME NULL,
+  `admin_id` INT(11) NULL,
   PRIMARY KEY (`questionnaire_id`),
   INDEX `AdminID_idx` (`admin_id` ASC),
   CONSTRAINT `AdminID`
