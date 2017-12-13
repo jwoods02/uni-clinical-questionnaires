@@ -51,10 +51,10 @@ $('#submit_questionnaire').click(function () {
             success: function (data) {
                 console.log("Questionnaire creation success");
 
-//                    TODO:
-//                    Make this redirect to edit page
             }
         });
+
+        window.location.href = "/";
 
     }
 
